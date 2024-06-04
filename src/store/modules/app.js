@@ -6,7 +6,8 @@ const state = {
     withoutAnimation: false
   },
   device: 'desktop',
-  size: Cookies.get('size') || 'medium'
+  size: Cookies.get('size') || 'medium',
+  language: Cookies.get('language') || 'zh'
 }
 
 const mutations = {
@@ -30,7 +31,12 @@ const mutations = {
   SET_SIZE: (state, size) => {
     state.size = size
     Cookies.set('size', size)
-  }
+  },
+  // ...其他配置项省略...
+	SET_LANGUAGE: (state, language) => {
+		state.language = language
+		Cookies.set('language', language)
+	}
 }
 
 const actions = {
@@ -45,7 +51,13 @@ const actions = {
   },
   setSize({ commit }, size) {
     commit('SET_SIZE', size)
-  }
+  },
+  // ...其他配置项省略...
+	setLanguage({
+		commit
+	}, language) {
+		commit('SET_LANGUAGE', language)
+	},
 }
 
 export default {

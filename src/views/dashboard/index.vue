@@ -1,6 +1,8 @@
 <template>
   <div class="app-container">
-    <div>首页</div>
+    <div>首页
+      {{ $t('route') }}
+    </div>
   </div>
 </template>
 

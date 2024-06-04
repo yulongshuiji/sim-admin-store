@@ -24,11 +24,14 @@ module.exports = {
    * In most cases please use '/' !!!
    * Detail: https://cli.vuejs.org/config/#publicpath
    */
+  css: {
+    sourceMap: true
+  },
   publicPath: '/',
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
-  productionSourceMap: false,
+  productionSourceMap: true,
   devServer: {
     port: port,
     open: true,
@@ -45,8 +48,18 @@ module.exports = {
         changeOrigin: true,
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''
-        }
-      }
+        },
+        onProxyReq: (proxyReq, req, res) => {
+          const proxyURL = `${process.env.VUE_APP_API_URL}${req.url.replace(process.env.VUE_APP_BASE_API, '')}`;
+          console.log('proxyURL', proxyURL);
+          proxyReq.setHeader('x-req-proxyURL', proxyURL); // 设置未生效
+        },
+        onProxyRes: (proxyRes, req, res) => {
+          const proxyURL = `${process.env.VUE_APP_API_URL}${req.url.replace(process.env.VUE_APP_BASE_API, '')}`;
+          proxyRes.headers['x-req-proxyURL'] = proxyURL; // 设置响应头可以看到
+        },
+      },
+
     }
   },
   configureWebpack: {
@@ -57,7 +70,8 @@ module.exports = {
       alias: {
         '@': resolve('src')
       }
-    }
+    },
+    devtool: 'source-map'
   },
   chainWebpack(config) {
     // it can improve the speed of the first screen, it is recommended to turn on preload
@@ -71,6 +85,8 @@ module.exports = {
         include: 'initial'
       }
     ])
+    config.resolve.alias
+      .set('@', path.resolve(__dirname, 'src'));
 
     // when there are many pages, it will cause too many meaningless requests
     config.plugins.delete('prefetch')
@@ -95,6 +111,7 @@ module.exports = {
     config
       .when(process.env.NODE_ENV !== 'development',
         config => {
+          config.devtool('source-map')
           config
             .plugin('ScriptExtHtmlWebpackPlugin')
             .after('html')
@@ -102,6 +119,7 @@ module.exports = {
             // `runtime` must same as runtimeChunk name. default is `runtime`
               inline: /runtime\..*\.js$/
             }])
+
             .end()
           config
             .optimization.splitChunks({

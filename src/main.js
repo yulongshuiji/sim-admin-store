@@ -1,5 +1,5 @@
 import Vue from 'vue'
-
+import i18n from './lang'
 import Cookies from 'js-cookie'
 
 import 'normalize.css/normalize.css' // a modern alternative to CSS resets
@@ -19,6 +19,10 @@ import './permission' // permission control
 import './utils/error-log' // error log
 
 import * as filters from './filters' // global filters
+
+Vue.use(ElementUI, {
+  i18n: (key, value) => i18n.t(key, value)
+})
 
 /**
  * If you don't want to use mock-server
@@ -60,6 +64,7 @@ Vue.prototype.handleTree = handleTree
 Vue.prototype.numberWithCommas = numberWithCommas
 
 import createSocket from './common/socket.js';
+import ElementUI from 'element-ui'
 const socket = createSocket(process.env.VUE_APP_SOCKET_URL, {
   reconnection: true,
   reconnectionDelay: 1000,
@@ -93,5 +98,6 @@ new Vue({
   el: '#app',
   router,
   store,
+  i18n,
   render: h => h(App)
 })

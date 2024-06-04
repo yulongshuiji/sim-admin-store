@@ -11,6 +11,7 @@ export default function checkPermission(value) {
     const permissionRoles = value
 
     const hasPermission = roles.some(role => {
+      console.log(permissionRoles, role);
       return permissionRoles.includes(role)
     })
     return hasPermission
