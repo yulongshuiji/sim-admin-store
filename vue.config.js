@@ -25,7 +25,15 @@ module.exports = {
    * Detail: https://cli.vuejs.org/config/#publicpath
    */
   css: {
-    sourceMap: true
+    sourceMap: true,
+    loaderOptions: {
+      sass: {
+        additionalData: `@import "@/styles/variables.scss";`
+      },
+      scss: {
+        prependData: `@import "@/styles/variables.scss";`
+      },
+    }
   },
   publicPath: '/',
   outputDir: 'dist',

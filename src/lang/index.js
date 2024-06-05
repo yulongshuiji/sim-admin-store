@@ -16,7 +16,7 @@ Vue.use(VueI18n); // 全局注册国际化包
 // 创建国际化插件的实例
 const i18n = new VueI18n({
   // 指定语言类型 zh表示中文  en表示英文 set locale 设置默认初始化的语言 i18n
-  locale: Cookies.get('language') || 'en',
+  locale: Cookies.get('language') || 'zh',
   // 将将elementUI语言包 和自定义语言包 加入到插件语言数据里 set locale messages
   messages: {
     // 英文环境下的语言数据

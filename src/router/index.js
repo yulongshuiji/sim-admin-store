@@ -32,17 +32,14 @@ import Layout from '@/layout'
  * a base page that does not have permission requirements
  * all roles can be accessed
  */
-export const constantRoutes = [
-  {
+export const constantRoutes = [{
     path: '/redirect',
     component: Layout,
     hidden: true,
-    children: [
-      {
-        path: '/redirect/:path(.*)',
-        component: () => import('@/views/redirect/index')
-      }
-    ]
+    children: [{
+      path: '/redirect/:path(.*)',
+      component: () => import('@/views/redirect/index')
+    }]
   },
   {
     path: '/login',
@@ -63,28 +60,62 @@ export const constantRoutes = [
     path: '/',
     component: Layout,
     redirect: '/dashboard',
-    children: [
-      {
-        path: 'dashboard',
-        component: () => import('@/views/dashboard/index'),
-        name: 'Dashboard',
-        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+    children: [{
+      path: 'dashboard',
+      component: () => import('@/views/dashboard/index'),
+      name: 'Dashboard',
+      meta: {
+        title: 'Dashboard',
+        icon: 'dashboard',
+        affix: true
       }
-    ]
+    }]
   },
   {
     path: '/profile',
     component: Layout,
     redirect: '/profile/index',
     hidden: true,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/profile/index'),
-        name: 'Profile',
-        meta: { title: 'Profile', icon: 'user', noCache: true }
+    children: [{
+      path: 'index',
+      component: () => import('@/views/profile/index'),
+      name: 'Profile',
+      meta: {
+        title: 'Profile',
+        icon: 'user',
+        noCache: true
       }
-    ]
+    }]
+  },
+  {
+    path: '/account-room',
+    component: Layout,
+    redirect: '/account-room/index',
+    hidden: true,
+    children: [{
+      path: 'index',
+      component: () => import('@/views/account-room/index'),
+      name: 'AccountRoom',
+      meta: {
+        title: 'AccountRoom',
+        noCache: true
+      },
+    }]
+  },
+  {
+    path: '/dataView',
+    component: Layout,
+    hidden: true,
+    redirect: '/account-room/index',
+    children: [{
+      path: 'index',
+      component: () => import('@/views/account-room/feat/dataView/index'),
+      name: 'DataView',
+      meta: {
+        title: 'AccountRoom',
+        noCache: true
+      },
+    }]
   }
 ]
 
@@ -94,12 +125,18 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
   // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  {
+    path: '*',
+    redirect: '/404',
+    hidden: true
+  }
 ]
 
 const createRouter = () => new Router({
   mode: 'history', // require service support
-  scrollBehavior: () => ({ y: 0 }),
+  scrollBehavior: () => ({
+    y: 0
+  }),
   routes: constantRoutes
 })
 
