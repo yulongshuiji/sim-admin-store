@@ -82,3 +82,92 @@
 .el-range-separator {
   box-sizing: content-box;
 }
+
+
+.el-table--group,
+.el-table--border {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.el-table--border .el-table__cell {
+  border-right: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16) !important;
+
+}
+
+.el-table tr {
+  background: transparent
+}
+
+.el-table {
+  background-color: transparent;
+}
+
+.el-table--border .el-table__cell {
+  background: transparent !important;
+
+
+}
+
+.el-table--border {
+  border: none !important;
+}
+
+.el-table--enable-row-transition .el-table__body td.el-table__cell {
+  color: #fff;
+}
+
+.el-table__expand-icon {
+  color: #fff
+}
+
+.el-table--border th.el-table__cell {
+  background: #2A2631 !important;
+}
+
+.el-table__header-wrapper,
+.el-table__footer-wrapper {
+  border-top-right-radius: 16px;
+  border-top-left-radius: 16px;
+
+}
+
+.el-table::before,
+.el-table--group::after,
+.el-table--border::after {
+  background: transparent;
+}
+
+.pagination-container {
+  background-color: transparent !important;
+}
+
+.el-input__inner {
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.16);
+  // border: none
+}
+
+//6-7
+.el-page-header__content {
+  color: $color1;
+}
+
+
+.el-radio-button__inner {
+  border-radius: 2px;
+  border: 1px solid #525457;
+  background: $pageBg2;
+  height: 20px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.el-radio-group {
+  display: flex;
+}
+
+.el-radio-button:first-child .el-radio-button__inner {
+  border-left: 1px solid #525457
+}

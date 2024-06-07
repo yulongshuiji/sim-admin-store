@@ -33,8 +33,8 @@ importers:
         specifier: 5.5.1
         version: 5.5.1
       echarts:
-        specifier: 4.2.1
-        version: 4.2.1
+        specifier: ^5.5.0
+        version: 5.5.0
       element-theme-darkplus:
         specifier: ^1.0.3
         version: 1.0.3
@@ -2789,8 +2789,8 @@ packages:
   ecc-jsbn@0.1.2:
     resolution: {integrity: sha512-eh9O+hwRHNbG4BLTjEl3nw044CkGm5X6LoaCf7LPp7UU8Qrt47JYNi6nPX8xjW97TKGKm1ouctg0QSpZe9qrnw==}
 
-  echarts@4.2.1:
-    resolution: {integrity: sha512-pw4xScRPsLegD/cqEcoXRKeA2SD4+s+Kyo0Na166NamOWhzNl2yI5RZ2rE97tBlAopNmhyMeBVpAeD5qb+ee1A==}
+  echarts@5.5.0:
+    resolution: {integrity: sha512-rNYnNCzqDAPCr4m/fqyUFv7fD9qIsd50S6GDFgO1DxZhncCsNsG7IfUlAlvZe5oSEQxtsjnHiUuppzccry93Xw==}
 
   editorconfig@1.0.4:
     resolution: {integrity: sha512-L9Qe08KWTlqYMVvMcTIvMAdl1cDUubzRNYL+WfA4bLDMHe4nemKkpmYzkznE1FwLKu0EEmy6obgQKzMJrg4x9Q==}
@@ -6684,6 +6684,9 @@ packages:
   tslib@1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
 
+  tslib@2.3.0:
+    resolution: {integrity: sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==}
+
   tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
@@ -7275,8 +7278,8 @@ packages:
   yup@0.26.10:
     resolution: {integrity: sha512-keuNEbNSnsOTOuGCt3UJW69jDE3O4P+UHAakO7vSeFMnjaitcmlbij/a3oNb9g1Y1KvSKH/7O1R2PQ4m4TRylw==}
 
-  zrender@4.0.7:
-    resolution: {integrity: sha512-TNloHe0ums6zxbHfnaCryM61J4IWDajZwNq6dHk9vfWhhysO/OeFvvR0drBs/nbXha2YxSzfQj2FiCd6RVBe+Q==}
+  zrender@5.5.0:
+    resolution: {integrity: sha512-O3MilSi/9mwoovx77m6ROZM7sXShR/O/JIanvzTwjN3FORfLSr81PsUGd7jlaYOeds9d8tw82oP44+3YucVo+w==}
 
 snapshots:
 
@@ -8164,9 +8167,7 @@ snapshots:
       source-map: 0.6.1
       string-length: 2.0.0
     transitivePeerDependencies:
-      - bufferutil
       - supports-color
-      - utf-8-validate
 
   '@jest/source-map@24.9.0':
     dependencies:
@@ -10543,9 +10544,10 @@ snapshots:
       jsbn: 0.1.1
       safer-buffer: 2.1.2
 
-  echarts@4.2.1:
+  echarts@5.5.0:
     dependencies:
-      zrender: 4.0.7
+      tslib: 2.3.0
+      zrender: 5.5.0
 
   editorconfig@1.0.4:
     dependencies:
@@ -12308,9 +12310,7 @@ snapshots:
       pretty-format: 24.9.0
       throat: 4.1.0
     transitivePeerDependencies:
-      - bufferutil
       - supports-color
-      - utf-8-validate
 
   jest-leak-detector@24.9.0:
     dependencies:
@@ -15317,6 +15317,8 @@ snapshots:
 
   tslib@1.14.1: {}
 
+  tslib@2.3.0: {}
+
   tslib@2.6.2: {}
 
   tty-browserify@0.0.0: {}
@@ -16076,4 +16078,6 @@ snapshots:
       synchronous-promise: 2.0.17
       toposort: 2.0.2
 
-  zrender@4.0.7: {}
+  zrender@5.5.0:
+    dependencies:
+      tslib: 2.3.0
