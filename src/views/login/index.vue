@@ -1,56 +1,62 @@
 <template>
   <div class="login-container">
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on" label-position="left">
-
-      <div class="title-container">
-        <h3 class="title">Login Form</h3>
-      </div>
+    <div class="title-container">
+      <span class="title">{{ $t('login.title') }}</span>
+      <span class="title-en">{{ $t('login.titleEn') }}</span>
+    </div>
+    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on"
+      label-position="left">
+      <img src="../../assets/logo.svg" alt="">
 
       <el-form-item prop="username">
         <span class="svg-container">
-          <svg-icon icon-class="user" />
+          <img class="icon-a" src="../../assets/login/user.svg" alt="">
         </span>
-        <el-input
-          ref="username"
-          v-model="loginForm.username"
-          placeholder="Username"
-          name="username"
-          type="text"
-          tabindex="1"
-          autocomplete="on"
-        />
+        <el-input ref="username" v-model="loginForm.username" placeholder="Username" name="username" type="text"
+          tabindex="1" autocomplete="on" />
       </el-form-item>
 
       <el-tooltip v-model="capsTooltip" content="Caps lock is On" placement="right" manual>
         <el-form-item prop="password">
           <span class="svg-container">
-            <svg-icon icon-class="password" />
+            <img class="icon-a" src="../../assets/login/password.svg" alt="">
+
           </span>
-          <el-input
-            :key="passwordType"
-            ref="password"
-            v-model="loginForm.password"
-            :type="passwordType"
-            placeholder="Password"
-            name="password"
-            tabindex="2"
-            autocomplete="on"
-            @keyup.native="checkCapslock"
-            @blur="capsTooltip = false"
-            @keyup.enter.native="handleLogin"
-          />
+          <el-input :key="passwordType" ref="password" v-model="loginForm.password" :type="passwordType"
+            placeholder="Password" name="password" tabindex="2" autocomplete="on" @keyup.native="checkCapslock"
+            @blur="capsTooltip = false" @keyup.enter.native="handleLogin" />
           <span class="show-pwd" @click="showPwd">
             <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
           </span>
         </el-form-item>
       </el-tooltip>
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
+
+      <el-form-item>
+        <div class="identity-box">
+          <div class="i-b-top">
+            <img src="../../assets/login/card.svg" alt="">
+            <span>请选择当前身份</span>
+          </div>
+          <div>
+            <el-radio-group v-model="radio">
+              <el-radio v-for="item in identityList" :key="item.key" :label="item.key">{{ item.text }}</el-radio>
+            </el-radio-group>
+          </div>
+        </div>
+      </el-form-item>
+      <div class="btn-area">
+        <el-button :loading="loading" type="primary" class="login-btn" style="width:100%;margin-bottom:30px;"
+          @click.native.prevent="handleLogin">Login</el-button>
+      </div>
+
     </el-form>
 
     <!-- 添加修改用户对话框 -->
-    <el-dialog :show-close="false" title="绑定服务点" :visible.sync="notBind" v-if="notBind" width="50%" :close-on-click-modal="false" append-to-body>
+    <el-dialog :show-close="false" title="绑定服务点" :visible.sync="notBind" v-if="notBind" width="50%"
+      :close-on-click-modal="false" append-to-body>
       <el-radio-group v-model="serviceId">
-        <el-radio v-for="item in serviceList" :key="item.service_id" :label="item.service_id" @change="handleRadioChanges(item)">{{item.service_name}}</el-radio>
+        <el-radio v-for="item in serviceList" :key="item.service_id" :label="item.service_id"
+          @change="handleRadioChanges(item)">{{ item.service_name }}</el-radio>
       </el-radio-group>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitBind">确 定</el-button>
@@ -91,11 +97,42 @@ export default {
       serviceList: [],
       serviceId: undefined,
       notBind: true,
+      radio: 1,
+      identityList: [
+        {
+          text: '配置中心',
+          key: 1,
+        },
+        {
+          text: '大账房',
+          key: 2,
+        },
+        {
+          text: '现场',
+          key: 3,
+        },
+        {
+          text: '财务',
+          key: 4,
+        },
+        {
+          text: '监控',
+          key: 5,
+        },
+        {
+          text: '外联',
+          key: 6,
+        },
+        {
+          text: '总经办',
+          key: 7,
+        }
+      ]
     }
   },
   watch: {
     $route: {
-      handler: function(route) {
+      handler: function (route) {
         const query = route.query
         if (query) {
           this.redirect = query.redirect
@@ -106,7 +143,7 @@ export default {
   },
   created() {
     this.serviceId = localStorage.getItem('serviceId');
-    if(this.serviceId && this.serviceId > 0){
+    if (this.serviceId && this.serviceId > 0) {
       this.notBind = false
     } else {
       this.notBind = true
@@ -123,7 +160,7 @@ export default {
   destroyed() {
   },
   methods: {
-    getServiceList(){
+    getServiceList() {
       serviceList().then(res => {
         this.serviceList = res.data
       })
@@ -159,15 +196,15 @@ export default {
         }
       })
     },
-    handleRadioChanges(value){
+    handleRadioChanges(value) {
       this.serviceId = value.service_id
     },
-    submitBind(){
-      if(this.serviceId == undefined){
+    submitBind() {
+      if (this.serviceId == undefined) {
         this.msgError('请选择要绑定的服务点')
         return false
       }
-      this.$socket.emit('join-room', {service_id: this.serviceId, source:"admin"})
+      this.$socket.emit('join-room', { service_id: this.serviceId, source: "admin" })
       localStorage.setItem('serviceId', this.serviceId)
       this.notBind = false
     }
@@ -176,8 +213,8 @@ export default {
 </script>
 
 <style lang="scss">
-$bg:#283443;
-$light_gray:#fff;
+$bg: #283443;
+$light_gray: #fff;
 $cursor: #fff;
 @supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
   .login-container .el-input input {
@@ -213,28 +250,39 @@ $cursor: #fff;
     background: rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     color: #454545;
+
+    .el-form-item__content {
+      display: flex;
+    }
   }
 }
 </style>
 
 <style lang="scss" scoped>
-$bg:#2d3a4b;
-$dark_gray:#889aa4;
-$light_gray:#eee;
+$bg: #2d3a4b;
+$dark_gray: #889aa4;
+$light_gray: #eee;
 
 .login-container {
   min-height: 100%;
   width: 100%;
-  background-color: $bg;
+  background-color: $pageBg;
   overflow: hidden;
+  background-image: url('../../assets/login.svg');
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 
   .login-form {
     position: relative;
-    width: 520px;
     max-width: 100%;
-    padding: 160px 35px 0;
     margin: 0 auto;
-    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid $border1;
+    background: $pageBg2 !important;
+    width: 608px;
+    flex-shrink: 0;
+    padding: 12px 88px 24px 88px;
   }
 
   .tips {
@@ -250,22 +298,40 @@ $light_gray:#eee;
   }
 
   .svg-container {
-    padding: 6px 5px 6px 15px;
-    color: $dark_gray;
-    vertical-align: middle;
     width: 30px;
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    padding-left: 12px;
   }
 
   .title-container {
     position: relative;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
 
     .title {
-      font-size: 26px;
       color: $light_gray;
-      margin: 0px auto 40px auto;
+      margin: 0px auto 16px auto;
       text-align: center;
       font-weight: bold;
+      font-family: YouSheBiaoTiHei;
+      font-size: 56px;
+      line-height: 64px;
+      /* 114.286% */
+    }
+
+    .title-en {
+      color: rgba(255, 255, 255, 0.70);
+      font-family: "PingFang SC";
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 28px;
+      margin-bottom: 24px;
+      /* 140% */
     }
   }
 
@@ -290,5 +356,54 @@ $light_gray:#eee;
       display: none;
     }
   }
+}
+
+.btn-area {
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+}
+
+.login-btn {
+
+  display: inline-flex;
+  padding: 9px 106px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 4px;
+  background: #409EFF;
+  width: fit-content !important;
+  margin: 0 auto;
+}
+
+.identity-box {
+  display: flex;
+  width: 432px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  flex-direction: column;
+  padding: 0 12px 12px 12px;
+
+  .el-radio-group {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .el-radio {
+    width: 17%;
+    margin-right: 0;
+  }
+
+  .i-b-top {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+}
+
+.icon-a {
+  width: 24px;
+  height: 24px;
 }
 </style>

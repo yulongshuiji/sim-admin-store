@@ -1,5 +1,9 @@
 export default {
   appName: '明瑞实业·SIM管理系统',
+  login: {
+    title: '欢迎使用SIM管理系统',
+    titleEn: 'Welcome to SIM Management System'
+  },
   accountRoom: {
     index: {
       title: '操作中心',

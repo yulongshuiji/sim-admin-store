@@ -16,7 +16,7 @@
 
     <card-list></card-list>
 
-    <el-row :gutter="24">
+    <el-row :gutter="24" style="display: flex">
       <el-col :lg="12">
         <div class="card-list">
           <!-- 柜台统计 -->
@@ -218,7 +218,7 @@
               </div>
             </div>
           </div>
-          <div class="cus-card">
+          <div class="cus-card" style="flex: 1">
             <div class="h-area">
               <el-page-header class="el-h" :content="'统计表'">
               </el-page-header>
@@ -233,7 +233,7 @@
               </div>
             </div>
             <div class="cus-card-content">
-                <echarts-com></echarts-com>
+              <echarts-com></echarts-com>
 
             </div>
           </div>

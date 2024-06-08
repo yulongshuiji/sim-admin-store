@@ -484,7 +484,7 @@ export default {
         this.queryGame = res.data
       })
     },
-    // 获取游戏列表
+    // 获取码种列表
     getCounterList() {
       counterList().then(res => {
         this.counterList = res.data

@@ -20,7 +20,7 @@
         </el-tooltip> -->
 
       </template>
-      <div class="common" @click.native="logout">
+      <div class="common" @click="logout">
         <img src="../../assets/acount-room/logout.svg">
       </div>
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
