@@ -30,7 +30,7 @@
           </span>
         </el-form-item>
       </el-tooltip>
-
+<!--
       <el-form-item>
         <div class="identity-box">
           <div class="i-b-top">
@@ -43,7 +43,7 @@
             </el-radio-group>
           </div>
         </div>
-      </el-form-item>
+      </el-form-item> -->
       <div class="btn-area">
         <el-button :loading="loading" type="primary" class="login-btn" style="width:100%;margin-bottom:30px;"
           @click.native.prevent="handleLogin">Login</el-button>

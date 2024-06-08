@@ -93,14 +93,25 @@ export const constantRoutes = [{
     redirect: '/account-room/index',
     hidden: true,
     children: [{
-      path: 'index',
-      component: () => import('@/views/account-room/index'),
-      name: 'AccountRoom',
-      meta: {
-        title: 'AccountRoom',
-        noCache: true
+        path: 'index',
+        component: () => import('@/views/account-room/index'),
+        name: 'AccountRoom',
+        meta: {
+          title: 'AccountRoom',
+          noCache: true
+        },
       },
-    }]
+      {
+        path: 'reponsity',
+        hidden: true,
+        component: () => import('@/views/account-room/feat/reponsityData/index'),
+        name: 'reponsity',
+        meta: {
+          title: 'reponsity',
+          noCache: true
+        },
+      }
+    ]
   },
   {
     path: '/dataView',
@@ -116,7 +127,8 @@ export const constantRoutes = [{
         noCache: true
       },
     }]
-  }
+  },
+
 ]
 
 /**

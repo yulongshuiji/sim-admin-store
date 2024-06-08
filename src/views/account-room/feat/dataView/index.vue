@@ -1,12 +1,7 @@
 <template>
   <div class="dataView-c">
     <div class="header">
-      <div class="common">
-        <img src="@/assets/acount-room/back.svg">
-      </div>
-      <div class="common">
-        <img src="@/assets/acount-room/index.svg">
-      </div>
+      <BackHead @back="back" @goHome="goHome"></BackHead>
       <el-page-header class="el-h" :content="$t('accountRoom.index.shuju')">
       </el-page-header>
       <div class="common" style="margin-left: auto">
@@ -260,6 +255,14 @@ export default {
       grow2,
       claim
     }
+  },
+  methods: {
+    back() {
+      this.$router.back()
+    },
+    goHome() {
+      this.$router.push('/')
+    },
   }
 }
 </script>

@@ -190,3 +190,29 @@ aside {
 .multiselect--active {
   z-index: 1000 !important;
 }
+
+
+//6-8
+
+.staus-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  .suc-cir {
+    width: 6px;
+    height: 6px;
+    display: flex;
+    border-radius: 50%;
+    background-color: #00B42A;
+  }
+
+  .fail-cir {
+    width: 6px;
+    height: 6px;
+    display: flex;
+    border-radius: 50%;
+    background-color: #F53F3F;
+  }
+}

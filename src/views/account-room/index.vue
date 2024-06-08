@@ -127,7 +127,8 @@ export default {
               // 入库
               key: '0-1',
               p: '0',
-              text: this.$t('accountRoom.index.inRes')
+              text: this.$t('accountRoom.index.inRes'),
+              route: '/account-room/reponsity',
             }
           ]
         },
@@ -406,7 +407,8 @@ export default {
         {
           // 数据总览
           key: '4',
-          text: this.$t('accountRoom.index.datacenter')
+          text: this.$t('accountRoom.index.datacenter'),
+          route: '/dataView/index'
         },
         {
           // 台账
@@ -498,10 +500,11 @@ export default {
       this.currentMenu = data
     },
     changeBox(row) {
-      if (this.jumpList.includes(row.key)) {
-        this.$router.push('/dataView/index')
+      if (row.route) {
+        this.$router.push(row.route)
         return
       }
+
       console.log(row);
       this.currentMenu = row.children || []
       this.step = row.key

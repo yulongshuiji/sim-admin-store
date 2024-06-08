@@ -53,6 +53,8 @@ Vue.config.productionTip = false
 import permission from '@/directive/permission/index.js'
 import { parseTime, resetForm, addDateTimeRange, selectDictLabel, download, handleTree, numberWithCommas } from '@/utils/kent.js'
 import Pagination from "@/components/Pagination";
+import BackHead from "@/components/backHead/index.vue"
+
 
 // 全局方法挂载
 Vue.prototype.parseTime = parseTime
@@ -76,6 +78,7 @@ Vue.prototype.$socket = socket;
 
 // 全局组件挂载
 Vue.component('Pagination', Pagination)
+Vue.component('BackHead', BackHead)
 
 Vue.prototype.msgSuccess = function (msg) {
   this.$message.closeAll();

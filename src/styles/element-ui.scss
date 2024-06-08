@@ -143,12 +143,21 @@
 }
 
 .el-input__inner {
-  border-radius: 8px;
+  border-radius: 2px;
   background: rgba(255, 255, 255, 0.16);
   // border: none
 }
 
 //6-7
+
+.el-tabs__item {
+  color: #fff;
+}
+
+.el-tabs .el-tabs--left {
+  height: fit-content;
+}
+
 .el-page-header__content {
   color: $color1;
 }
@@ -170,4 +179,108 @@
 
 .el-radio-button:first-child .el-radio-button__inner {
   border-left: 1px solid #525457
+}
+
+.el-tabs__item {
+  color: #fff;
+}
+
+.el-tabs .el-tabs--left {
+  height: fit-content;
+}
+
+
+//6-8
+.el-dialog__body {
+  background: $pageBg2;
+}
+
+.el-dialog__header {
+  background: $pageBg2;
+
+}
+
+.el-dialog__title {
+  color: $color1;
+}
+
+.el-dialog__footer {
+  background: $pageBg2;
+}
+
+//
+.el-tabs__nav-wrap::after {
+  background-color: transparent;
+}
+
+.el-tabs__item {
+  font-size: 24px;
+}
+
+.el-date-editor .el-range-input {
+  background: transparent;
+}
+
+
+.el-date-editor .el-range-separator {
+  color: $color1
+}
+
+.el-button--primary {
+  border-radius: 2px;
+  background: #165DFF;
+  display: flex;
+  padding: 5px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  min-width: 50px;
+  align-self: stretch;
+  border-color: transparent;
+}
+
+.el-divider {
+  background-color: #4C4D4F;
+}
+
+.el-divider--horizontal {
+  margin: 8px 0;
+}
+
+.el-table thead {
+  color: $color1;
+  height: 40px;
+}
+
+.el-table__header-wrapper,
+.el-table__footer-wrapper {
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+}
+
+.el-table--border .el-table__cell {
+  border-right: none !important;
+}
+
+.el-table .el-table__cell {
+  padding: 0 !important;
+  height: 40px;
+}
+
+.el-pagination.is-background .btn-prev, .el-pagination.is-background .btn-next, .el-pagination.is-background .el-pager li {
+  background: transparent;
+}
+
+.el-pagination.is-background .el-pager li:not(.disabled).active {
+  background: rgba(60, 126, 255, 0.20);
+  color: #165DFF;
+}
+
+.el-date-editor--daterange.el-input, .el-date-editor--daterange.el-input__inner, .el-date-editor--timerange.el-input, .el-date-editor--timerange.el-input__inner {
+  width: 90%;
+  border-radius: 2px;
+}
+
+.el-input--suffix .el-input__inner {
+  border-radius: 2px;
 }

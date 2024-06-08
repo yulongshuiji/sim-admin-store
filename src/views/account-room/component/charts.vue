@@ -38,8 +38,9 @@ export default {
           },
         },
         legend: {
-          // data: ['Evaporation', 'Precipitation', 'Precipitations', 'Temperature', 'Temperature2'],
-          data: []
+          bottom: 10,
+          
+          data: ['Evaporation', 'Precipitation', 'Precipitations', 'Temperature', 'Temperature2'],
         },
         xAxis: [
           {
