@@ -54,6 +54,7 @@ import permission from '@/directive/permission/index.js'
 import { parseTime, resetForm, addDateTimeRange, selectDictLabel, download, handleTree, numberWithCommas } from '@/utils/kent.js'
 import Pagination from "@/components/Pagination";
 import BackHead from "@/components/backHead/index.vue"
+import ServiceBind from "@/components/bindModal/index.vue"
 
 
 // 全局方法挂载
@@ -79,6 +80,7 @@ Vue.prototype.$socket = socket;
 // 全局组件挂载
 Vue.component('Pagination', Pagination)
 Vue.component('BackHead', BackHead)
+Vue.component('ServiceBind', ServiceBind)
 
 Vue.prototype.msgSuccess = function (msg) {
   this.$message.closeAll();
@@ -93,6 +95,38 @@ Vue.prototype.msgError = function (msg) {
 Vue.prototype.msgInfo = function (msg) {
   this.$message.closeAll();
   this.$message.info(msg);
+}
+
+Vue.prototype.$InitSocket = function () {
+  let serviceId = localStorage.getItem("serviceId");
+  if (serviceId) {
+    this.$socket.emit('join-room', {
+      service_id: serviceId,
+      source: "admin"
+    });
+  }
+
+  // 监听房间加入
+  this.$socket.on('join-room-back', (data) => {
+    if (data.code === 200) {
+      // 关闭注册
+      this.$socket.emit("fingerprint-register-stop", {
+        service_id: serviceId
+      });
+      // 关闭标签读取
+      this.$socket.emit("read-tags-stop", {
+        service_id: serviceId
+      });
+    }
+  });
+
+  // 监听重复登录
+  this.$socket.on('leave-room', (data) => {
+    localStorage.removeItem("serviceId");
+    store.dispatch('user/resetToken').then(() => {
+      location.reload();
+    });
+  });
 }
 
 Vue.use(permission)

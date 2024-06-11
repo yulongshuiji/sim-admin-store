@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-table :data="tableData" row-key="menu_id" :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
+    <el-table show-summary :data="tableData" row-key="menu_id" :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
       max-height="650" border>
 
       <el-table-column v-for="column in columns" :key="column.key" :prop="column.key" :label="column.name">
@@ -20,7 +20,7 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column label="操作" v-if="operateObj.length > 0">
+      <el-table-column label="操作" v-if="operateObj && operateObj.length > 0">
         <template slot-scope="scope">
           <el-button size="mini" style="margin-right: 20px" type="text" v-for="(item,index) in operateObj" :key="index" @click="handleUpdate(scope.row)">{{
             item.label }}</el-button>

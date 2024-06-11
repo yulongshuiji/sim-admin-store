@@ -82,10 +82,6 @@
   }
 }
 
-
-
-
-
 .card-panel-icon-wrapper {
   display: flex;
   flex-direction: column;
@@ -98,12 +94,14 @@
   flex-direction: column;
   gap: 24px;
   height: 100%;
+  margin-bottom: 20px;
 
   .cus-card {
     border-radius: 8px;
     border: 1px solid $border1;
     background: $pageBg2 !important;
     padding: 16px 8px 24px 16px;
+    height: 100%;
 
     .h-area {
       display: flex;
@@ -149,6 +147,7 @@
       justify-content: space-between;
       margin-top: 20px;
       gap: 20px;
+
       .el-divider--vertical {
         height: 124px;
         background-color: #4C4D4F;
@@ -272,4 +271,164 @@
 
 .reset {
   background-color: rgba(255, 255, 255, 0.16);
+}
+
+.flex-d {
+  flex-direction: column;
+}
+
+
+.h-area {
+  display: flex;
+  height: 50px;
+  color: $color1 !important;
+  /* 24/CN-Medium */
+  font-family: "PingFang SC";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px;
+  gap: 10px;
+  /* 133.333% */
+  align-items: center;
+
+  .recent {
+    color: $color2;
+    /* 14/CN-Regular */
+    font-family: "PingFang SC";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    /* 157.143% */
+    margin-left: auto;
+  }
+
+  .row2-area {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, .1);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.card5-box1 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+
+  .flex-c {
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+  }
+}
+
+.w100 {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 26px;
+  align-items: flex-start !important;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.panel-group-card {
+  .card-six {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+
+    .today-sale {
+      color: rgba(255, 255, 255, 0.70);
+      text-align: center;
+
+      /* 16/CN-Regular */
+      font-family: "PingFang SC";
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 24px;
+      /* 150% */
+    }
+
+    .count {
+      color: rgba(255, 255, 255, 0.90);
+    }
+
+    .card-panel-num {
+      color: rgba(255, 255, 255, 0.90);
+      text-align: center;
+      font-family: "HarmonyOS Sans";
+      font-size: 36px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 44px;
+      /* 122.222% */
+    }
+  }
+}
+
+.data-area {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 20px 0;
+  .data-box {
+    width: 268px;
+    height: 40px;
+    flex-shrink: 0;
+    background: $border1;
+    color: $color1;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    .text {
+      font-size: 14px;
+    }
+
+    .num {
+      font-size: 16px;
+    }
+  }
+
+  .code {
+    background: #F54E4E;
+    height: 56px;
+    border-radius: 4px;
+
+    .text {
+      font-size: 16px;
+    }
+
+    .num {
+      font-size: 20px;
+    }
+  }
+
+  .cash {
+    background: #1DB440;
+    height: 56px;
+    border-radius: 4px;
+
+    .text {
+      font-size: 16px;
+    }
+
+    .num {
+      font-size: 20px;
+    }
+  }
+
+  .water {
+    color: red;
+  }
 }

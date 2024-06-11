@@ -14,5 +14,8 @@ const getters = {
   errorLogs: state => state.errorLog.logs,
   language: state => state.app.language,
 	size: state => state.app.size,
+  stackRoutes: state => state.permission.stackRoute,
+  showService: state => state.settings.showBindeService,
+  serveiceList: state => state.settings.serviceList
 }
 export default getters

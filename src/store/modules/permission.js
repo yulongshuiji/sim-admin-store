@@ -79,13 +79,18 @@ export function filterAsyncRoutes(routes, roles) {
 
 const state = {
   routes: [],
-  addRoutes: []
+  addRoutes: [],
+  stackRoute: []
+
 }
 
 const mutations = {
   SET_ROUTES: (state, routes) => {
     state.addRoutes = routes
     state.routes = constantRoutes.concat(routes)
+  },
+  SET_STACKS: (state, routes) => {
+    state.stackRoute = routes
   }
 }
 
@@ -120,6 +125,9 @@ const actions = {
         console.log(error)
       })
     })
+  },
+  handleStack({commit}, data) {
+    commit('SET_STACKS', data)
   }
 }
 

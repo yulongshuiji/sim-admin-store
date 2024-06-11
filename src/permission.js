@@ -5,6 +5,7 @@ import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 import { getToken } from '@/utils/auth' // get token from cookie
 import getPageTitle from '@/utils/get-page-title'
+import { serviceBind, serviceBindList, serviceIsBind } from '@/api/user'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
@@ -15,15 +16,15 @@ router.beforeEach(async(to, from, next) => {
   NProgress.start()
 
   // 判断是否有绑定服务点
-  let serviceId = localStorage.getItem("serviceId")
-  if(!serviceId){
-    if (to.path !== '/login') {
-      await store.dispatch('user/resetToken')
-      Message.error('重复绑定服务点')
-      next(`/login?redirect=${to.path}`)
-      NProgress.done()
-    }
-  }
+  // let serviceId = localStorage.getItem("serviceId")
+  // if(!serviceId){
+  //   if (to.path !== '/login') {
+  //     await store.dispatch('user/resetToken')
+  //     Message.error('重复绑定服务点')
+  //     next(`/login?redirect=${to.path}`)
+  //     NProgress.done()
+  //   }
+  // }
 
   // set page title
   // document.title = getPageTitle(to.meta.title)
@@ -79,7 +80,22 @@ router.beforeEach(async(to, from, next) => {
   }
 })
 
-router.afterEach(() => {
+router.afterEach((to, from) => {
   // finish progress bar
+  if(from.path == '/login') {
+    checkServiceList()
+  }
   NProgress.done()
 })
+
+async function checkServiceList() {
+  const res = await serviceIsBind()
+  console.log("是否需要绑定服务点", res.data.is_service);
+  const { is_service }  = res.data
+  if(is_service) return
+
+  const res2 = await serviceBindList()
+  console.log("可绑定服务点列表", res2);
+  store.dispatch('settings/changeServiceList', res2.data)
+  store.dispatch('settings/changeService', true)
+}

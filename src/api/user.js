@@ -24,3 +24,37 @@ export function logout() {
     method: 'post'
   })
 }
+
+// 是否需要绑定服务点
+export function serviceIsBind() {
+  return request({
+    url: '/adminCommon/serviceTypeDetail',
+    method: 'post',
+    data: {
+      service_type: 1
+    }
+  })
+}
+
+// 服务点列表
+export function serviceBindList() {
+  return request({
+    url: '/adminCommon/serviceList',
+    method: 'post',
+    data: {
+      service_type: 2
+    }
+  })
+}
+
+// 服务点绑定
+export function serviceBind(data) {
+  return request({
+    url: '/adminCommon/serviceBind',
+    method: 'post',
+    data: {
+      ...data,
+    }
+  })
+}
+

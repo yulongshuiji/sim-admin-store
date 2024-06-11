@@ -51,17 +51,7 @@
 
     </el-form>
 
-    <!-- 添加修改用户对话框 -->
-    <el-dialog :show-close="false" title="绑定服务点" :visible.sync="notBind" v-if="notBind" width="50%"
-      :close-on-click-modal="false" append-to-body>
-      <el-radio-group v-model="serviceId">
-        <el-radio v-for="item in serviceList" :key="item.service_id" :label="item.service_id"
-          @change="handleRadioChanges(item)">{{ item.service_name }}</el-radio>
-      </el-radio-group>
-      <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="submitBind">确 定</el-button>
-      </div>
-    </el-dialog>
+
 
   </div>
 </template>
@@ -142,13 +132,13 @@ export default {
     }
   },
   created() {
-    this.serviceId = localStorage.getItem('serviceId');
-    if (this.serviceId && this.serviceId > 0) {
-      this.notBind = false
-    } else {
-      this.notBind = true
-    }
-    this.getServiceList()
+    // this.serviceId = localStorage.getItem('serviceId');
+    // if (this.serviceId && this.serviceId > 0) {
+    //   this.notBind = false
+    // } else {
+    //   this.notBind = true
+    // }
+    // this.getServiceList()
   },
   mounted() {
     if (this.loginForm.username === '') {

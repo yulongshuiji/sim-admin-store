@@ -8,7 +8,9 @@ const state = {
   showSettings: showSettings,
   tagsView: tagsView,
   fixedHeader: fixedHeader,
-  sidebarLogo: sidebarLogo
+  sidebarLogo: sidebarLogo,
+  showBindeService: false,
+  serviceList: []
 }
 
 const mutations = {
@@ -17,12 +19,28 @@ const mutations = {
     if (state.hasOwnProperty(key)) {
       state[key] = value
     }
+  },
+  CHANGE_SERVICE: (state, data) => {
+    // eslint-disable-next-line no-prototype-builtins
+  state.showBindeService = data
+  },
+  CHANGE_SERVICELIST: (state, data) => {
+    // eslint-disable-next-line no-prototype-builtins
+   state.serviceList = data
+   console.log(data);
   }
 }
 
 const actions = {
   changeSetting({ commit }, data) {
     commit('CHANGE_SETTING', data)
+  },
+  changeService({ commit }, data) {
+    console.log("触发", data);
+    commit('CHANGE_SERVICE', data)
+  },
+  changeServiceList({ commit }, data) {
+    commit('CHANGE_SERVICELIST', data)
   }
 }
 

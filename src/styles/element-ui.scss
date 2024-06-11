@@ -284,3 +284,7 @@
 .el-input--suffix .el-input__inner {
   border-radius: 2px;
 }
+
+.el-select .el-input.is-focus .el-input__inner {
+  border-color: transparent;
+}

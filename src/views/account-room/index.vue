@@ -321,7 +321,9 @@ export default {
               // 数据中心
               key: '1-6',
               p: '1',
-              text: this.$t('accountRoom.index.shuju')
+              text: this.$t('accountRoom.index.shuju'),
+              route: '/account-room/code-room/dataCenter'
+
             },
 
           ]
@@ -375,6 +377,12 @@ export default {
               // 退码
               key: '2-9',
               text: this.$t('accountRoom.index.tuima'),
+            },
+            {
+              // 数据中心
+              key: '2-10',
+              text: this.$t('accountRoom.index.shuju'),
+              route:  '/account-room/counter/dataCenter'
             }
           ]
         },
@@ -400,6 +408,7 @@ export default {
               key: '3-3',
               p: '3',
               text: this.$t('accountRoom.index.shuju'),
+              route:  '/account-room/counting-room/dataCenter'
             }
 
           ]
@@ -420,24 +429,28 @@ export default {
               key: '5-1',
               p: '5',
               text: this.$t('accountRoom.index.kctz'),
+              route: '/account-room/ledger/inventory'
             },
             {
               // 桌台台账
               key: '5-2',
               p: '5',
               text: this.$t('accountRoom.index.zttz'),
+              route: '/account-room/ledger/tableTop'
             },
             {
               //客人台账
               key: '5-3',
               p: '5',
               text: this.$t('accountRoom.index.krtz'),
+              route: '/account-room/ledger/guest'
             },
             {
               // 账房台账
               key: '5-4',
               p: '5',
               text: this.$t('accountRoom.index.zftz'),
+              route: '/account-room/ledger/accounting'
             },
           ]
         },
@@ -500,6 +513,8 @@ export default {
       this.currentMenu = data
     },
     changeBox(row) {
+      console.log(row);
+
       if (row.route) {
         this.$router.push(row.route)
         return
@@ -615,7 +630,7 @@ export default {
   border-radius: 8px;
   border: 1px solid $border1;
   // flex: 1;
-  height: 468px;
+  min-height: 468px;
 }
 
 .el-page-header__left {
@@ -642,7 +657,7 @@ export default {
 }
 
 .out-card2 {
-  height: 252px;
+  min-height: 252px;
 
   .el-card__body {
     display: flex;

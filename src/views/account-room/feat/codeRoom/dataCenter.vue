@@ -9,13 +9,37 @@
       </div>
     </div>
     <card-list></card-list>
+    <el-row>
+      <el-col :span="24">
+        <div class="card-list">
+          <div class="cus-card">
+            <div class="h-area">
+              <el-page-header class="el-h" :content="'统计表'">
+              </el-page-header>
+              <el-radio-group v-model="radio1">
+                <el-radio-button label="今日"></el-radio-button>
+                <el-radio-button label="昨日"></el-radio-button>
+                <el-radio-button label="一周"></el-radio-button>
+              </el-radio-group>
+              <span class="recent">最近统计:2024-06-01 12:35:41</span>
+              <div class="row2-area">
+                <img :src="grow2" alt="">
+              </div>
+            </div>
+            <!-- 柜台统计 -->
+            <EchartsCom></EchartsCom>
+          </div>
+        </div>
+      </el-col>
+    </el-row>
     <el-row :gutter="24" style="display: flex">
       <el-col :span="24">
         <div class="card-list">
           <div class="cus-card">
             <!-- 柜台统计 -->
+
             <el-tabs v-model="activeName" @tab-click="handleClick">
-              <el-tab-pane label="入库清单" name="first">
+              <el-tab-pane v-for="(item, index) in tabsArr" :key="index" :label="item.name" :name="item.key">
                 <formChoose></formChoose>
                 <el-divider></el-divider>
                 <div class="box21">
@@ -23,11 +47,8 @@
                   <el-button type="primary" icon="el-icon-refresh-left" class="reset">批量导出</el-button>
                 </div>
                 <tableList :columns="columns1" :tableData="currentTableData" :operateObj="operateObj"></tableList>
-
               </el-tab-pane>
-              <el-tab-pane label="出库清单" name="second">
 
-              </el-tab-pane>
             </el-tabs>
           </div>
         </div>
@@ -37,12 +58,13 @@
 </template>
 
 <script>
-import cardList from '../../component/cardList2.vue'
+import cardList from '../../component/cardList3.vue'
 import grow2 from '@/assets/acount-room/grow2.svg'
 import claim from '@/assets/acount-room/claim.svg'
-import EchartsCom from '../../component/charts.vue'
 import formChoose from '../../component/form-choose/index.vue'
 import tableList from './table.vue'
+import EchartsCom from '../../component/charts2.vue'
+
 export default {
   components: {
     cardList,
@@ -143,6 +165,170 @@ export default {
           t8: 1
         }
 
+      ],
+      tabsArr: [
+        {
+          name: '发行明细',
+          key: 'one',
+          columns: [
+            {
+              key: 't1',
+              name: '清单编号',
+            },
+            {
+              key: 't2',
+              name: '状态',
+            },
+            {
+              key: 't3',
+              name: '发行时间',
+            },
+            {
+              key: 't4',
+              name: '币种',
+            },
+            {
+              key: 't5',
+              name: '筹码类型',
+            },
+            {
+              key: 't6',
+              name: '筹码面额',
+            },
+            {
+              key: 't7',
+              name: '筹码数量',
+            },
+            {
+              key: 't8',
+              name: '操作人',
+            },
+          ]
+        },
+        {
+          name: '入柜明细',
+          key: 'two',
+          columns: [
+            {
+              key: 't1',
+              name: '清单编号',
+            },
+            {
+              key: 't2',
+              name: '柜台名称',
+            },
+            {
+              key: 't3',
+              name: '入柜时间',
+            },
+            {
+              key: 't4',
+              name: '币种',
+            },
+            {
+              key: 't5',
+              name: '筹码类型',
+            },
+            {
+              key: 't6',
+              name: '筹码面额',
+            },
+            {
+              key: 't7',
+              name: '筹码数量',
+            },
+            {
+              key: 't8',
+              name: '操作人',
+            },
+            {
+              key: 't9',
+              name: '状态',
+            },
+          ]
+        },
+        {
+          name: '出码明细',
+          key: 'three',
+          columns: [
+            {
+              key: 't1',
+              name: '流水号',
+            },
+            {
+              key: 't2',
+              name: '状态',
+            },
+            {
+              key: 't3',
+              name: '柜台名称',
+            },
+            {
+              key: 't4',
+              name: '桌台名称',
+            },
+            {
+              key: 't5',
+              name: '币种',
+            },
+            {
+              key: 't6',
+              name: '码种',
+            },
+            {
+              key: 't7',
+              name: '金额',
+            },
+            {
+              key: 't8',
+              name: '备注',
+            },
+            {
+              key: 't9',
+              name: '操作人',
+            },
+            {
+              key: 't10',
+              name: '验收人（现场）',
+            },{
+              key: 't11',
+              name: '创建时间',
+            },{
+              key: 't12',
+              name: '验收时间（现场）',
+            },{
+              key: 't13',
+              name: '最近修改时间',
+            },{
+              key: 't14',
+              name: '修改记录',
+            },
+            {
+              key: 't15',
+              name: '修改操作人',
+            },
+          ]
+        },
+        {
+          name: '加彩明细',
+          key: 'four'
+        },
+        {
+          name: '收码明细',
+          key: 'five'
+        },
+        {
+          name: '提彩明细',
+          key: 'six'
+        },
+        {
+          name: '小费兑换记录',
+          key: 'seven'
+        },
+        {
+          name: '异常筹码记录',
+          key: 'eight'
+        },
       ],
       columns1: [
         {

@@ -110,7 +110,97 @@ export const constantRoutes = [{
           title: 'reponsity',
           noCache: true
         },
-      }
+      },
+      {
+        path: 'code-room',
+        hidden: true,
+        component: () => import('@/views/account-room/feat/codeRoom/dataCenter'),
+        name: 'codeRoom',
+        meta: {
+          title: 'codeRoom',
+          noCache: true
+        },
+        children: [{
+          hidden: true,
+          name: 'dataCenter',
+          path: 'dataCenter',
+          component: () => import('@/views/account-room/feat/codeRoom/dataCenter'),
+          meta: {
+            title: 'dataCenter',
+            noCache: true
+          },
+        }]
+      },
+      {
+        path: 'counter',
+        hidden: true,
+        component: () => import('@/views/account-room/feat/counter/index'),
+        name: 'counter',
+        meta: {
+          title: 'counter',
+          noCache: true
+        },
+      },
+      {
+        path: 'counter/dataCenter',
+        hidden: true,
+        component: () => import('@/views/account-room/feat/counter/dataCenter/index'),
+        name: 'counterdataCenter',
+        meta: {
+          title: 'counterdataCenter',
+          noCache: true
+        },
+      },
+      {
+        path: 'counting-room/dataCenter',
+        hidden: true,
+        component: () => import('@/views/account-room/feat/countingRoom/dataCenter.vue'),
+        name: 'countingRoomdataCenter',
+        meta: {
+          title: 'countingRoomdataCenter',
+          noCache: true
+        },
+      },
+      {
+        path: 'ledger/inventory',
+        hidden: true,
+        component: () => import('@/views/account-room/feat/ledger/inventory'),
+        name: 'ledgerInventory',
+        meta: {
+          title: 'ledgerInventory',
+          noCache: true
+        },
+      },
+      {
+        path: 'ledger/guest',
+        hidden: true,
+        component: () => import('@/views/account-room/feat/ledger/guest.vue'),
+        name: 'ledgerguest',
+        meta: {
+          title: 'ledgerguest',
+          noCache: true
+        },
+      },
+      {
+        path: 'ledger/tableTop',
+        hidden: true,
+        component: () => import('@/views/account-room/feat/ledger/tableTop.vue'),
+        name: 'ledgertableTop',
+        meta: {
+          title: 'ledgertableTop',
+          noCache: true
+        },
+      },
+      {
+        path: 'ledger/accounting',
+        hidden: true,
+        component: () => import('@/views/account-room/feat/ledger/accounting.vue'),
+        name: 'ledgeraccounting',
+        meta: {
+          title: 'ledgeraccounting',
+          noCache: true
+        },
+      },
     ]
   },
   {
