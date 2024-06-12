@@ -217,6 +217,39 @@ export const constantRoutes = [{
         noCache: true
       },
     }]
+  }, {
+    path: '/permission',
+    component: Layout,
+    hidden: true,
+    redirect: '/permission/menu',
+    children: [{
+        path: 'menu',
+        component: () => import('@/views/permission/menu.vue'),
+        name: 'Permission',
+        meta: {
+          title: 'Permission',
+          noCache: true
+        },
+      },
+      {
+        path: 'role',
+        component: () => import('@/views/permission/role.vue'),
+        name: 'Permission',
+        meta: {
+          title: 'Permission',
+          noCache: true
+        },
+      },
+      {
+        path: 'admin',
+        component: () => import('@/views/permission/admin.vue'),
+        name: 'Permission',
+        meta: {
+          title: 'Permission',
+          noCache: true
+        },
+      }
+    ]
   },
 
 ]

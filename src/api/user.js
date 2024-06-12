@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 登录接口
 export function login(data) {
   return request({
-    url: '/admin/login',
+    url: '/adminStore/login',
     method: 'post',
     data: data
   })
@@ -31,7 +31,7 @@ export function serviceIsBind() {
     url: '/adminCommon/serviceTypeDetail',
     method: 'post',
     data: {
-      service_type: 1
+      service_type: 2
     }
   })
 }

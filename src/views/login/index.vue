@@ -70,7 +70,7 @@ export default {
     }
     return {
       loginForm: {
-        username: 'admin',
+        username: 'admin-store',
         password: '123456'
       },
 

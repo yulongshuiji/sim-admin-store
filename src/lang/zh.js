@@ -62,5 +62,19 @@ export default {
       jiaoban: '交班',
       jbjl: '交班记录'
     }
+  },
+  setting: {
+    index: {
+      yxpz: '游戏配置',
+      xtpz: '系统配置',
+      gtpz: '服务点配置',
+      ztpz: '桌台配置',
+      bzpz: '币种配置',
+      cmpz: '筹码配置',
+      qx: '账号与权限',
+      cdgl: '菜单管理',
+      jsgl: '角色管理',
+      glygl: '管理员管理'
+    }
   }
 }

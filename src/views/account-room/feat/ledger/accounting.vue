@@ -70,15 +70,8 @@
                 <span>100,100,100</span>
               </div>
             </div>
+            <EchartsCom2></EchartsCom2>
 
-            <el-tabs v-model="activeName" @tab-click="handleClick">
-              <el-tab-pane v-for="(item, index) in tabsArr" :key="index" :label="item.name" :name="item.key">
-                <div class="box21 margin-p">
-                  <el-button type="primary" icon="el-icon-refresh-left">批量导出</el-button>
-                </div>
-                <TableList :columns="columns1" :tableData="currentTableData"></TableList>
-              </el-tab-pane>
-            </el-tabs>
           </div>
         </div>
       </el-col>
@@ -116,6 +109,8 @@ import cardList from '../../component/cardList9.vue'
 import grow2 from '@/assets/acount-room/grow2.svg'
 import claim from '@/assets/acount-room/claim.svg'
 import EchartsCom from '../../component/charts3.vue'
+import EchartsCom2 from '../../component/charts6.vue'
+
 import Select from '../../component/select.vue'
 import TableList from './table.vue'
 import formChoose from '../../component/form-choose/index.vue'
@@ -124,6 +119,7 @@ export default {
   components: {
     cardList,
     EchartsCom,
+    EchartsCom2,
     Select,
     formChoose,
     TableList

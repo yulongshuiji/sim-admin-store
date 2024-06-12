@@ -477,6 +477,29 @@ export default {
           // 权限
           key: '7',
           text: this.$t('accountRoom.index.account'),
+          children: [
+            {
+              key: '7-1',
+              p: '7',
+              text: this.$t('setting.index.cdgl'),
+              route: '/permission/menu',
+              // permissionTag: 'setting:privilege:menu'
+            },
+            {
+              key: '7-2',
+              p: '7',
+              text: this.$t('setting.index.jsgl'),
+              route: '/permission/role',
+              // permissionTag: 'setting:privilege:role'
+            },
+            {
+              key: '7-3',
+              p: '7',
+              text: this.$t('setting.index.glygl'),
+              route: '/permission/admin',
+              // permissionTag: 'setting:privilege:admin'
+            }
+          ]
         }
       ],
 
