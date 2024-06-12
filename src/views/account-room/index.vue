@@ -130,6 +130,13 @@ export default {
               key: '0-1',
               p: '0',
               text: this.$t('accountRoom.index.inRes'),
+              route: '/account-room/reponsity/featrue',
+            },
+            {
+              // 数据中心
+              key: '0-2',
+              p: '0',
+              text: this.$t('accountRoom.index.shuju'),
               route: '/account-room/reponsity',
             }
           ]

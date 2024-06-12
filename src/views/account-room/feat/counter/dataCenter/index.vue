@@ -387,7 +387,8 @@ export default {
 .el-button--primary {
   border-radius: 2px;
   background: #165DFF;
-  display: flex;
+  display:inline-flex;
+
   padding: 5px 16px;
   justify-content: center;
   align-items: center;

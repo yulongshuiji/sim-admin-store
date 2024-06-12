@@ -6,7 +6,7 @@ import 'normalize.css/normalize.css' // a modern alternative to CSS resets
 
 import Element from 'element-ui'
 import './styles/element-variables.scss'
-import enLang from 'element-ui/lib/locale/lang/en'// 如果使用中文语言包请默认支持，无需额外引入，请删除该依赖
+import enLang from 'element-ui/lib/locale/lang/en' // 如果使用中文语言包请默认支持，无需额外引入，请删除该依赖
 
 import '@/styles/index.scss' // global css
 
@@ -33,7 +33,9 @@ Vue.use(ElementUI, {
  * please remove it before going online ! ! !
  */
 if (process.env.NODE_ENV === 'production') {
-  const { mockXHR } = require('../mock')
+  const {
+    mockXHR
+  } = require('../mock')
   mockXHR()
 }
 
@@ -51,7 +53,15 @@ Vue.config.productionTip = false
 
 // 权限框架注册全局
 import permission from '@/directive/permission/index.js'
-import { parseTime, resetForm, addDateTimeRange, selectDictLabel, download, handleTree, numberWithCommas } from '@/utils/kent.js'
+import {
+  parseTime,
+  resetForm,
+  addDateTimeRange,
+  selectDictLabel,
+  download,
+  handleTree,
+  numberWithCommas
+} from '@/utils/kent.js'
 import Pagination from "@/components/Pagination";
 import BackHead from "@/components/backHead/index.vue"
 import ServiceBind from "@/components/bindModal/index.vue"
@@ -84,12 +94,20 @@ Vue.component('ServiceBind', ServiceBind)
 
 Vue.prototype.msgSuccess = function (msg) {
   this.$message.closeAll();
-  this.$message({ showClose: true, message: msg, type: "success" });
+  this.$message({
+    showClose: true,
+    message: msg,
+    type: "success"
+  });
 }
 
 Vue.prototype.msgError = function (msg) {
   this.$message.closeAll();
-  this.$message({ showClose: true, message: msg, type: "error" });
+  this.$message({
+    showClose: true,
+    message: msg,
+    type: "error"
+  });
 }
 
 Vue.prototype.msgInfo = function (msg) {
@@ -100,6 +118,8 @@ Vue.prototype.msgInfo = function (msg) {
 Vue.prototype.$InitSocket = function () {
   let serviceId = localStorage.getItem("serviceId");
   if (serviceId) {
+    console.log("加入房间====");
+
     this.$socket.emit('join-room', {
       service_id: serviceId,
       source: "admin"
@@ -131,10 +151,12 @@ Vue.prototype.$InitSocket = function () {
 
 Vue.use(permission)
 
-new Vue({
+const vueInstance = new Vue({
   el: '#app',
   router,
   store,
   i18n,
   render: h => h(App)
 })
+
+export default vueInstance

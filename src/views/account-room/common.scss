@@ -469,3 +469,21 @@
 }
 
 
+
+.cus-card {
+  border-radius: 8px;
+  border: 1px solid $border1;
+  background: $pageBg2 !important;
+  padding: 16px 8px 24px 16px;
+  height: 100%;
+}
+
+.el-page-header__left {
+  display: none;
+}
+
+.f-content-card {
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: #2A2631;
+}

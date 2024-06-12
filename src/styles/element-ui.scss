@@ -229,7 +229,7 @@
 .el-button--primary {
   border-radius: 2px;
   background: #165DFF;
-  display: flex;
+  display: inline-flex;
   padding: 5px 16px;
   justify-content: center;
   align-items: center;
@@ -237,6 +237,15 @@
   min-width: 50px;
   align-self: stretch;
   border-color: transparent;
+}
+
+.el-button {
+  height: 32px;
+  display: inline-flex;
+  padding: 5px 16px;
+  align-items: center;
+  border-radius: 2px;
+
 }
 
 .el-divider {
@@ -288,3 +297,5 @@
 .el-select .el-input.is-focus .el-input__inner {
   border-color: transparent;
 }
+
+

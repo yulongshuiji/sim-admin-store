@@ -43,7 +43,7 @@ export default {
       console.log("绑定成功", res);
       if (res.code !== 200) return
       this.$InitSocket()
-      store.dispatch('settings/changeService', false)
+      this.$store.dispatch('settings/changeService', false)
     }
   }
 }

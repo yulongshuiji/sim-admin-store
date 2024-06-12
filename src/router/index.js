@@ -112,6 +112,16 @@ export const constantRoutes = [{
         },
       },
       {
+        path: 'reponsity/featrue',
+        hidden: true,
+        component: () => import('@/views/account-room/feat/reponsityData/featrue.vue'),
+        name: 'reponsity/featrue',
+        meta: {
+          title: 'reponsity/featrue',
+          noCache: true
+        },
+      },
+      {
         path: 'code-room',
         hidden: true,
         component: () => import('@/views/account-room/feat/codeRoom/dataCenter'),
