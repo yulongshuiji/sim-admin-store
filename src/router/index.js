@@ -221,7 +221,7 @@ export const constantRoutes = [{
     path: '/permission',
     component: Layout,
     hidden: true,
-    redirect: '/permission/menu',
+    redirect: '/permission/role',
     children: [{
         path: 'menu',
         component: () => import('@/views/permission/menu.vue'),

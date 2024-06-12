@@ -3,9 +3,12 @@ import request from '@/utils/request'
 // 查询管理员
 export function adminListPage(data) {
   return request({
-    url: '/adminPermission/adminListPage',
+    url: '/adminCommon/adminListPage',
     method: 'post',
-    data
+    data: {
+      ...data,
+      service_type: 2
+    }
   })
 }
 
@@ -30,25 +33,31 @@ export function adminDetail(data) {
 // 新增
 export function adminAdd(data) {
   return request({
-    url: '/adminPermission/adminAdd',
+    url: '/adminCommon/adminAdd',
     method: 'post',
-    data
+    data: {
+      ...data,
+      service_type: 2
+    }
   })
 }
 
 // 编辑
 export function adminUpdate(data) {
   return request({
-    url: '/adminPermission/adminUpdate',
+    url: '/adminCommon/adminUpdate',
     method: 'post',
-    data
+    data: {
+      ...data,
+      service_type: 2
+    }
   })
 }
 
 // 删除
 export function adminDelete(data) {
   return request({
-    url: '/adminPermission/adminDelete',
+    url: '/adminCommon/adminDelete',
     method: 'post',
     data
   })

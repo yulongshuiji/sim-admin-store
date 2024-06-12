@@ -107,13 +107,15 @@ import down from '@/assets/acount-room/down.svg'
 import grow2 from '@/assets/acount-room/grow2.svg'
 import grow from '@/assets/acount-room/grow.svg'
 import { findMenuListById } from '@/utils/tool'
+import { mapGetters } from 'vuex'
+import { serviceBind, serviceBindList, serviceIsBind } from '@/api/user'
 export default {
   name: "AccountRoom",
   data() {
     return {
 
       up, down, grow2, grow,
-      jumpList: ['4'],
+      jumpList: [],
       title1: this.$t('accountRoom.index.title'),
       title2: this.$t('accountRoom.index.title2'),
       title3: this.$t('accountRoom.index.title3'),
@@ -478,13 +480,13 @@ export default {
           key: '7',
           text: this.$t('accountRoom.index.account'),
           children: [
-            {
-              key: '7-1',
-              p: '7',
-              text: this.$t('setting.index.cdgl'),
-              route: '/permission/menu',
-              // permissionTag: 'setting:privilege:menu'
-            },
+            // {
+            //   key: '7-1',
+            //   p: '7',
+            //   text: this.$t('setting.index.cdgl'),
+            //   route: '/permission/menu',
+            //   // permissionTag: 'setting:privilege:menu'
+            // },
             {
               key: '7-2',
               p: '7',
@@ -507,7 +509,8 @@ export default {
       count: 20,
       loading: false,
       step: null,
-      stackRoute: []
+      pageStack: []
+
     }
   },
   computed: {
@@ -520,7 +523,12 @@ export default {
     showBack() {
       console.log(this.currentMenu);
       return (this.currentMenu.length > 0 && this.currentMenu[0]?.key.includes("-")) || this.stackRoute.length > 0
-    }
+    },
+    ...mapGetters(
+      {
+        stackRoute: 'stackRoutes'
+      }
+    )
   },
 
   methods: {
@@ -532,33 +540,43 @@ export default {
       // }, 2000)
     },
     initShowMenu(index) {
-      const data = this.menuList
-      this.currentMenu = data
-    },
-    changeBox(row) {
-      console.log(row);
+      if (this.stackRoute.length > 0) {
+        this.pageStack = this.stackRoute
+        const arr = this.pageStack[this.pageStack.length - 1]
+        const list = this.menuList.find(item => item.key === arr).children
 
+        this.currentMenu = list
+      } else {
+        const data = this.menuList
+        this.currentMenu = data
+      }
+
+    },
+    async changeBox(row) {
       if (row.route) {
         this.$router.push(row.route)
         return
       }
-
-      console.log(row);
       this.currentMenu = row.children || []
       this.step = row.key
-      this.stackRoute.push(row.key)
+      this.pageStack.push(row.key)
+      this.$store.dispatch('permission/handleStack', this.pageStack)
     },
     backPre() {
-      const arr = this.stackRoute
+      console.log("返回");
+      const arr = this.pageStack
       const item = arr.pop()
       const list2 = findMenuListById(this.menuList, item)
-      this.stackRoute = arr
+      this.pageStack = arr
+      this.$store.dispatch('permission/handleStack', this.pageStack)
       this.currentMenu = list2
     },
     goHome() {
       this.currentMenu = this.menuList
-      this.stackRoute = []
-    }
+      this.pageStack = []
+      this.$store.dispatch('permission/handleStack', this.pageStack)
+
+    },
 
   },
 
