@@ -61,7 +61,7 @@
       <el-col :lg="16">
         <div class="card-list">
           <cardList></cardList>
-          <div class="cus-card" >
+          <div class="cus-card">
             <div class="h-area">
               <el-page-header class="el-h" :content="'统计表'">
               </el-page-header>
@@ -81,9 +81,9 @@
             </div>
           </div>
 
-          <div class="cus-card" style="flex: 1" >
+          <div class="cus-card" style="flex: 1">
             <div class="h-area">
-              <el-page-header class="el-h" :content="'统计表'">
+              <el-page-header class="el-h" :content="'桌台游戏占比统计'">
               </el-page-header>
               <el-radio-group v-model="radio1">
                 <el-radio-button label="今日"></el-radio-button>
@@ -96,7 +96,10 @@
               </div>
             </div>
             <div class="cus-card-content">
-              <echarts-com></echarts-com>
+              <!-- <div class="data-view">
+                <div class="data-view-box"></div>
+              </div> -->
+              <echarts-com-2></echarts-com-2>
 
             </div>
           </div>
@@ -113,6 +116,8 @@ import cardList from '../../component/cardList7.vue'
 import grow2 from '@/assets/acount-room/grow2.svg'
 import claim from '@/assets/acount-room/claim.svg'
 import EchartsCom from '../../component/charts3.vue'
+import EchartsCom2 from '../../component/charts4.vue'
+
 import Select from '../../component/select.vue'
 import TableList from './table.vue'
 import formChoose from '../../component/form-choose/index.vue'
@@ -123,7 +128,8 @@ export default {
     EchartsCom,
     Select,
     formChoose,
-    TableList
+    TableList,
+    EchartsCom2
   },
   data() {
     return {
@@ -354,7 +360,30 @@ export default {
         }
 
       ],
-      activeName: 'one'
+      activeName: 'one',
+      gameRate: [
+        {
+          name: 'Figma',
+          rate: 20
+        },
+        {
+          name: 'Figma',
+          rate: 20
+        },
+        {
+          name: 'Figma',
+          rate: 10
+        },
+        {
+          name: 'Figma',
+          rate: 15
+        },
+        {
+          name: 'Figma',
+          rate: 35
+        },
+
+      ]
     }
   },
   methods: {
@@ -380,7 +409,11 @@ export default {
 
 .tableTop {
   .card-list .cus-card {
-    height: auto;
+    height: 100%;
+  }
+
+  .cus-card-content {
+    margin-top: 0 !important;
   }
 }
 
