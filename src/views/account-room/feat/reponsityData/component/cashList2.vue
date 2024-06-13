@@ -2,13 +2,14 @@
   <div style="width: 680px" class="cash-container">
     <div class="cash-box" v-for="(item, index) in list" :key="index" @click="change(index)">
       <img :src="item.icon" alt="" style="width: 74px;height: 74px">
-      <span class="inner" :class="{ 'checked': item.choose }"></span>
+      <div class="inner">{{ item.num || 0 }}</div>
     </div>
   </div>
 
 </template>
 
 <script>
+
 import one from '@/assets/code/0.5.svg'
 import two from '@/assets/code/1.svg'
 import three from '@/assets/code/5.svg'
@@ -31,6 +32,7 @@ export default {
       list: [
         {
           icon: one,
+          num: 100
         },
         {
           icon: two,
@@ -98,6 +100,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
+  margin-top: 10px;
 }
 
 .cash-box {
@@ -112,38 +115,22 @@ export default {
   align-items: center;
 
   .inner {
-    border: 1px solid #dcdfe6;
-    border-radius: 100%;
-    width: 14px;
-    height: 14px;
-    background-color: #fff;
-    position: relative;
-    cursor: pointer;
-    display: inline-block;
-    box-sizing: border-box;
-
-    &::after {
-      width: 4px;
-      height: 4px;
-      border-radius: 100%;
-      background-color: #fff;
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      transition: transform .15s ease-in;
-    }
+    width: 100px;
+    height: 22px;
+    background: #232324;
+    border: 1px solid #306FFF;
+    color:  rgba(255, 255, 255, 0.90);
+    line-height: 22px;
+    text-align: center;
+    /* 14/CN-Medium */
+    font-family: "PingFang SC";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    border-radius: 16px;
   }
 
-  .checked {
-    border-color: #409eff;
-    background: #409eff;
 
-    &::after {
-      transform: translate(-50%, -50%) scale(1);
-    }
-  }
 
 
 }

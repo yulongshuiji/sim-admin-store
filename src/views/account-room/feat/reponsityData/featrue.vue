@@ -5,7 +5,7 @@
       <el-page-header class="el-h" :content="'创建入库清单'">
       </el-page-header>
       <div class="f-content-card card">
-        <el-form ref="form" :model="form" label-width="80px">
+        <el-form ref="form" :model="form" label-width="80px" v-if="step == 0">
           <el-form-item required label="入库时间">
             <el-input style="width: 680px;" v-model="form.region" placeholder="">
             </el-input>
@@ -27,9 +27,12 @@
           </el-form-item>
           <div class="btn-area">
             <el-button type="info">取消</el-button>
-            <el-button type="primary">下一步</el-button>
+            <el-button type="primary" @click="next">下一步</el-button>
           </div>
         </el-form>
+        <CodeBase v-else-if="step == 1" @next="next" @pre="pre"></CodeBase>
+        <recognition v-else-if="step == 2" @next="next"></recognition>
+        <cusTip v-else :show="show" @closeModal="closeModal" @btnEvent="btnEvent"></cusTip>
       </div>
     </div>
   </div>
@@ -37,16 +40,24 @@
 
 <script>
 import CashList from './component/cashList.vue'
+import CodeBase from './component/base.vue'
+import recognition from './component/recognition.vue';
+import cusTip from './component/modal.vue'
 export default {
   components: {
-    CashList
+    CashList,
+    CodeBase,
+    recognition,
+    cusTip
   },
   data() {
     return {
       form: {
 
       },
-      radio: ''
+      step: 0,
+      radio: '',
+      show: false
     }
   },
   methods: {
@@ -61,6 +72,34 @@ export default {
     goHome() {
       this.$router.push('/')
     },
+    closeModal() {
+      this.show = false
+    },
+    next() {
+      this.step += 1
+      if (this.step == 3) {
+        this.show = true
+      }
+    },
+    pre() {
+      this.step -= 1
+    },
+    btnEvent(e) {
+      console.log(e);
+      if (e == 0) {
+        // 新建入库清单
+        this.step = 0
+      }
+      if (e == 1) {
+        // 继续入库
+        this.step = 1
+      }
+
+      if (e == 2) {
+        // 退出
+        this.back()
+      }
+    }
   },
   created() {
     this.serviceId = localStorage.getItem('serviceId')
@@ -137,6 +176,8 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
+
       .btn-area {
         display: flex;
         justify-content: center;
