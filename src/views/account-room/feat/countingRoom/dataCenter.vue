@@ -146,82 +146,243 @@ export default {
       ],
       tabsArr: [
         {
-          name: '收银产生',
+          name: '桌台账目',
           key: 'one',
           columns: [
             {
               key: 't1',
-              name: '清单编号',
+              name: '流水号',
             },
             {
               key: 't2',
-              name: '状态',
+              name: '游戏类型',
             },
             {
               key: 't3',
-              name: '发行时间',
+              name: '桌台名称',
             },
             {
               key: 't4',
-              name: '币种',
+              name: '币种类型',
             },
             {
               key: 't5',
-              name: '筹码类型',
+              name: '客户总押',
             },
             {
               key: 't6',
-              name: '筹码面额',
+              name: '客户总赢',
             },
             {
               key: 't7',
-              name: '筹码数量',
+              name: '洗码量',
             },
             {
               key: 't8',
-              name: '操作人',
+              name: '码费',
+            },
+            {
+              key: 't9',
+              name: '产生积分',
+            },
+            {
+              key: 't10',
+              name: '对子和总赢',
+            },
+            {
+              key: 't11',
+              name: '保险总赢',
+            },
+            {
+              key: 't12',
+              name: '幸运6总赢',
+            },
+            {
+              key: 't13',
+              name: '代理收益',
+            },
+            {
+              key: 't14',
+              name: '公司收益',
             },
           ]
         },
         {
-          name: '退码产生',
+          name: '客人注单',
           key: 'two',
           columns: [
             {
               key: 't1',
-              name: '清单编号',
+              name: '流水号',
             },
             {
               key: 't2',
-              name: '柜台名称',
+              name: '日结时间',
             },
             {
               key: 't3',
-              name: '入柜时间',
+              name: '下注时间',
             },
             {
               key: 't4',
-              name: '币种',
+              name: '游戏',
             },
             {
               key: 't5',
-              name: '筹码类型',
+              name: '桌台',
             },
             {
               key: 't6',
-              name: '筹码面额',
+              name: '靴-局',
             },
             {
               key: 't7',
-              name: '筹码数量',
+              name: '开奖结果',
             },
             {
               key: 't8',
-              name: '操作人',
+              name: '洗码号',
             },
             {
               key: 't9',
-              name: '状态',
+              name: '姓名',
+            },
+
+            {
+              key: 't10',
+              name: '币种',
+            },
+            {
+              key: 't11',
+              name: '码种',
+            },
+            {
+              key: 't12',
+              name: '总押',
+            },
+            {
+              key: 't13',
+              name: '庄总押',
+            },
+            {
+              key: 't14',
+              name: '庄总赢',
+            },
+            {
+              key: 't15',
+              name: '闲总押',
+            },
+            {
+              key: 't16',
+              name: '闲总赢',
+            },
+            {
+              key: 't17',
+              name: '和总押',
+            },
+            {
+              key: 't18',
+              name: '和总赢',
+            },
+            {
+              key: 't19',
+              name: '庄对总押',
+            },
+            {
+              key: 't20',
+              name: '庄对总赢',
+            },
+            {
+              key: 't21',
+              name: '保险总赢',
+            },
+            {
+              key: 't22',
+              name: '幸运6总押',
+            },
+            {
+              key: 't23',
+              name: '幸运6总赢',
+            },
+            {
+              key: 't24',
+              name: '龙7总押',
+            },
+            {
+              key: 't25',
+              name: '龙7总赢',
+            },
+            {
+              key: 't26',
+              name: '熊8总押',
+            },
+            {
+              key: 't27',
+              name: '熊8总赢',
+            },
+            {
+              key: 't28',
+              name: '龙总押',
+            },
+            {
+              key: 't29',
+              name: '龙总赢',
+            },
+            {
+              key: 't30',
+              name: '虎总押',
+            },
+            {
+              key: 't31',
+              name: '虎总赢',
+            },
+            {
+              key: 't32',
+              name: '和（龙）总押',
+            },
+            {
+              key: 't33',
+              name: '和（龙）总赢',
+            },
+            {
+              key: 't34',
+              name: '对子总押',
+            },
+            {
+              key: 't35',
+              name: '对子总赢',
+            },
+            {
+              key: 't36',
+              name: '大总押',
+            },
+            {
+              key: 't37',
+              name: '大总赢',
+            },
+            {
+              key: 't38',
+              name: '小总押',
+            },
+            {
+              key: 't39',
+              name: '小总赢',
+            },
+            {
+              key: 't40',
+              name: '全围总押',
+            },
+            {
+              key: 't41',
+              name: '全围总赢',
+            },
+            {
+              key: 't42',
+              name: '电子输',
+            },
+            {
+              key: 't43',
+              name: '电子赢',
             },
           ]
         },
