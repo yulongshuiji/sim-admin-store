@@ -12,7 +12,7 @@
       <el-page-header class="el-h" :content="title1">
       </el-page-header>
       <el-row :gutter="20" class="el-row">
-        <el-col :span="6" v-for="(item, i) in currentMenu" :key="i">
+        <el-col :span="6" v-for="(item, i) in currentMenu" :key="i" v-hasPermi="[item.permissionTag]">
           <el-card class="box-card" shadow="hover" @click.native="changeBox(item)">
             <div class="card-content" style="width: 100%;height: 100%">
               <div class="card-img">
@@ -124,6 +124,7 @@ export default {
           // 仓库
           key: '0',
           text: this.$t('accountRoom.index.response'),
+          permissionTag: 'store:responsity',
           children: [
             {
               // 入库
@@ -144,6 +145,7 @@ export default {
         {
           // 码房
           key: '1',
+          permissionTag: 'store:codeRoom',
           text: this.$t('accountRoom.index.mafang'),
           children: [
             {
@@ -340,6 +342,7 @@ export default {
         {
           // 柜台
           key: '2',
+          permissionTag: 'store:tableTop',
           text: this.$t('accountRoom.index.guitai'),
           children: [
             {
@@ -398,6 +401,7 @@ export default {
         {
           // 账房
           key: '3',
+          permissionTag: 'store:accountingRoom',
           text: this.$t('accountRoom.index.zhangfang'),
           children: [
             {
@@ -425,12 +429,14 @@ export default {
         {
           // 数据总览
           key: '4',
+          permissionTag: 'store:dataCenter',
           text: this.$t('accountRoom.index.datacenter'),
           route: '/dataView/index'
         },
         {
           // 台账
           key: '5',
+          permissionTag: 'store:ledger',
           text: this.$t('accountRoom.index.taizhang'),
           children: [
             {
@@ -466,6 +472,7 @@ export default {
         {
           // 交接班
           key: '6',
+          permissionTag: 'store:changeShifits',
           text: this.$t('accountRoom.index.jiaojie'),
           children: [
             {
@@ -485,6 +492,7 @@ export default {
         {
           // 权限
           key: '7',
+          permissionTag: 'store:privilege',
           text: this.$t('accountRoom.index.account'),
           children: [
             // {
