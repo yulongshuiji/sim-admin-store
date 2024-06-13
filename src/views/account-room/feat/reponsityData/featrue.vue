@@ -101,7 +101,6 @@ export default {
     },
     selectTime() {
       const res = this.form.currentTime.slice(0, 10)
-      console.log(res);
       this.$store.dispatch('code/setCurrentTime', res)
       return this.form.currentTime.slice(0, 10)
     },
@@ -114,7 +113,6 @@ export default {
     this.$store.dispatch('code/setCounterList', newVal);
   },
   selectTime(newVal) {
-    console.log(newVal);
     this.$store.dispatch('code/setCurrentTime', newVal);
   },
   codeNum(newVal) {
@@ -140,16 +138,13 @@ export default {
       this.show = false
     },
     canNext() {
-      console.log(this.form);
       this.$refs.form.validate(res => {
-        console.log(res);
         if (res) {
           this.next()
           this.readTags()
           this.$store.dispatch('code/setCodeDes', this.form.denomination)
 
         }
-        console.log("表单不通过");
       })
     },
     next() {
@@ -163,14 +158,12 @@ export default {
       }
     },
     radioChange(e) {
-      console.log("radioChange", e);
       this.getCounterList(e)
     },
     pre() {
       this.step -= 1
     },
     btnEvent(e) {
-      console.log(e);
       if (e == 0) {
         // 新建入库清单
         this.step = 0
@@ -202,7 +195,6 @@ export default {
       this.form.counter_id = undefined
       counterList({ currency_id: value }).then(res => {
         this.counterList = res.data ? res.data : []
-        console.log(this.counterList);
         const defaults = this.counterList.length > 0 ? this.counterList[0].counter_id : ''
         this.form = {
           ...this.form,
@@ -220,7 +212,6 @@ export default {
       })
     },
     numEvent(e) {
-      console.log(e);
       this.form.denomination = e
     },
     arraysEqual(arr1, arr2) {
@@ -249,7 +240,6 @@ export default {
       }
 
       const res = await codeInResposity(params)
-      console.log("入库结果", res);
       if(res.code == 200) {
         this.next()
       }else {
@@ -258,7 +248,6 @@ export default {
     }
   },
   created() {
-    // this.getCurrencyList()
     this.$InitSocket()
     this.serviceId = localStorage.getItem('serviceId')
     let that = this
@@ -280,7 +269,6 @@ export default {
   },
   mounted() {
     this.getCurrencyList()
-    console.log(getCurrentFormattedTime());
     this.form.currentTime = getCurrentFormattedTime()
   },
   destroyed() {
