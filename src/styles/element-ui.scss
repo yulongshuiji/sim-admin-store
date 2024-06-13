@@ -298,4 +298,8 @@
   border-color: transparent;
 }
 
+.el-input.is-disabled .el-input__inner {
+  background-color: $bg1;
+}
+
 

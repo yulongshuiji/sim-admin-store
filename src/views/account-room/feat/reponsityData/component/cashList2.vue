@@ -1,14 +1,15 @@
 <template>
   <div style="width: 680px" class="cash-container">
-    <div class="cash-box" v-for="(item, index) in list" :key="index" @click="change(index)">
-      <img :src="item.icon" alt="" style="width: 74px;height: 74px">
-      <div class="inner">{{ item.num || 0 }}</div>
+    <div class="cash-box">
+      <img :src="current" alt="" style="width: 74px;height: 74px">
+      <div class="inner">{{ codeNum }}</div>
     </div>
   </div>
 
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 
 import one from '@/assets/code/0.5.svg'
 import two from '@/assets/code/1.svg'
@@ -32,55 +33,89 @@ export default {
       list: [
         {
           icon: one,
-          num: 100
+          value: '0.5'
         },
         {
           icon: two,
+          value: '1'
+
         },
         {
           icon: three,
+          value: '5'
+
         },
         {
           icon: four,
+          value: '10'
+
         },
         {
           icon: five,
+          value: '20'
+
         },
         {
           icon: six,
+          value: '25'
+
         },
         {
           icon: seven,
+          value: '50'
+
         },
         {
           icon: eight,
+          value: '100'
+
         },
         {
           icon: nine,
+          value: '500'
+
         },
         {
           icon: ten,
+          value: '1000'
         },
         {
           icon: eleven,
+          value: '5000'
         },
         {
           icon: twelve,
+          value: '10000'
+
         },
         {
           icon: thirtheen,
+          value: '20000'
+
         },
         {
           icon: fourteen,
+          value: '50000'
+
         },
         {
           icon: fifteen,
+          value: '100000'
+
         },
         {
           icon: sixteen,
+          value: '200000'
+
         },
 
       ]
+    }
+  },
+  computed: {
+    ...mapGetters(['codeNum', 'codeDes']),
+    current() {
+      return this.list.find(item => item.value == this.codeDes).icon
     }
   },
   methods: {

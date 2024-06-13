@@ -6,11 +6,12 @@
       </el-page-header>
       <div class="f-content-card card">
         <el-form ref="form" :model="form" label-width="80px" v-if="step == 0">
-          <el-form-item label="入库时间">
-            <el-input style="width: 680px;" v-model="form.region" placeholder="">
+          <el-form-item label="入库时间" prop="currentTime">
+            <el-input style="width: 680px;" disabled v-model="form.currentTime" placeholder="">
             </el-input>
           </el-form-item>
-          <el-form-item required label="币种" class="radio">
+          <el-form-item required label="币种" class="radio" prop="currency_id"
+            v-if="currencyList && currencyList.length !== 0">
             <el-radio-group v-model="form.currency_id" @change="radioChange">
               <el-radio v-for="item in currencyList" :key="item.currency_id" :label="item.currency_id">
                 {{ item.currency_name }}
@@ -18,23 +19,25 @@
             </el-radio-group>
 
           </el-form-item>
-          <el-form-item required label="筹码类型" class="radio">
-            <el-radio-group v-model="radio">
+
+          <el-form-item required label="筹码类型" class="radio" prop="counter_id"
+            v-if="counterList && counterList.length !== 0">
+            <el-radio-group v-model="form.counter_id">
               <el-radio v-for="item in counterList" :key="item.counter_id" :label="item.counter_id">
                 {{ item.counter_name }}
               </el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item required label="面额选择">
-            <CashList></CashList>
+          <el-form-item required label="面额选择" prop="denomination">
+            <CashList @numEvent="numEvent"></CashList>
           </el-form-item>
           <div class="btn-area">
             <el-button type="info">取消</el-button>
-            <el-button type="primary" @click="next">下一步</el-button>
+            <el-button type="primary" @click="canNext">下一步</el-button>
           </div>
         </el-form>
-        <CodeBase v-else-if="step == 1" @next="next" @pre="pre"></CodeBase>
-        <recognition v-else-if="step == 2" @next="next"></recognition>
+        <CodeBase v-else-if="step == 1" :reading="isReading" :codeNum="codeNum" @next="next" @pre="pre"></CodeBase>
+        <recognition v-else-if="step == 2" @next="recognitionNext"></recognition>
         <cusTip v-else :show="show" @closeModal="closeModal" @btnEvent="btnEvent"></cusTip>
       </div>
     </div>
@@ -50,8 +53,8 @@ import cusTip from './component/modal.vue'
 import ErrorTip from '@/components/error/index.vue'
 import { currencyList } from '@/api/currency'
 import { counterList, counterDetail } from '@/api/counter'
-
-
+import { getCurrentFormattedTime } from '@/utils/tool'
+import { codeInResposity } from '@/api/code'
 export default {
   components: {
     CashList,
@@ -63,7 +66,11 @@ export default {
   data() {
     return {
       form: {
-
+        currentTime: '',
+        currency_id: '',
+        counter_id: '',
+        denomination: '',
+        tags: []
       },
       step: 0,
       radio: '',
@@ -75,12 +82,49 @@ export default {
       counterList: [],
       // 码种面额设置列表
       counterChipList: [],
+      currentTime: '',
+      isReading: false,
+      codeNum: 0,
+
     }
   },
+  computed: {
+    selectCurencyList() {
+      const res = this.currencyList.filter(item => item.currency_id == this.form.currency_id)
+      this.$store.dispatch('code/setCurrntList', res)
+      return this.currencyList.filter(item => item.currency_id == this.form.currency_id)
+    },
+    selectCounterList() {
+      const res = this.counterList.filter(item => item.counter_id == this.form.counter_id)
+      this.$store.dispatch('code/setCounterList', res)
+      return this.counterList.filter(item => item.counter_id == this.form.counter_id)
+    },
+    selectTime() {
+      const res = this.form.currentTime.slice(0, 10)
+      console.log(res);
+      this.$store.dispatch('code/setCurrentTime', res)
+      return this.form.currentTime.slice(0, 10)
+    },
+  },
+  watch: {
+  selectCurencyList(newVal) {
+    this.$store.dispatch('code/setCurrntList', newVal);
+  },
+  selectCounterList(newVal) {
+    this.$store.dispatch('code/setCounterList', newVal);
+  },
+  selectTime(newVal) {
+    console.log(newVal);
+    this.$store.dispatch('code/setCurrentTime', newVal);
+  },
+  codeNum(newVal) {
+    this.$store.dispatch('code/setCodeNum', newVal);
+
+  }
+},
   methods: {
     // 读取标签
     readTags() {
-      this.disabledRead = true;
       this.$socket.emit("read-tags-start", { service_id: this.serviceId, action: "tagAdd" });
     },
     back() {
@@ -92,13 +136,28 @@ export default {
     closeModal() {
       this.show = false
     },
+    canNext() {
+      console.log(this.form);
+      this.$refs.form.validate(res => {
+        console.log(res);
+        if (res) {
+          this.next()
+          this.readTags()
+          this.$store.dispatch('code/setCodeDes', this.form.denomination)
+
+        }
+        console.log("表单不通过");
+      })
+    },
     next() {
       this.step += 1
       if (this.step == 3) {
         this.show = true
       }
-
-
+    },
+    radioChange(e) {
+      console.log("radioChange", e);
+      this.getCounterList(e)
     },
     pre() {
       this.step -= 1
@@ -133,10 +192,17 @@ export default {
     },
     // 获取游戏列表
     getCounterList(value) {
-      console.log("请求");
       this.form.counter_id = undefined
       counterList({ currency_id: value }).then(res => {
-        this.counterList = res.data
+        this.counterList = res.data ? res.data : []
+        console.log(this.counterList);
+        const defaults = this.counterList.length > 0 ? this.counterList[0].counter_id : ''
+        this.form = {
+          ...this.form,
+          counter_id: defaults
+        }
+        // this.getCounterDetail(this.form.counter_id)
+        // console.log(this.form);
       })
     },
     // 获取码种详情
@@ -146,22 +212,69 @@ export default {
         this.counterChipList = res.data.counter_chip
       })
     },
+    numEvent(e) {
+      console.log(e);
+      this.form.denomination = e
+    },
+    arraysEqual(arr1, arr2) {
+      if (arr1.length !== arr2.length) {
+        return false;
+      }
+
+      // Compare each element
+      const sortedArr1 = [...arr1].sort();
+      const sortedArr2 = [...arr2].sort();
+
+      for (let i = 0; i < sortedArr1.length; i++) {
+        if (sortedArr1[i] !== sortedArr2[i]) {
+          return false;
+        }
+      }
+
+      return true;
+    },
+    async recognitionNext() {
+      const params = {
+        currency_id: this.form.currency_id,
+        counter_id: this.form.counter_id,
+        denomination: Number(this.form.denomination),
+        tags: this.form.tags
+      }
+
+      const res = await codeInResposity(params)
+      console.log("入库结果", res);
+      if(res.code == 200) {
+        this.next()
+      }else {
+        this.step = 1
+      }
+    }
   },
   created() {
     // this.getCurrencyList()
-
+    this.$InitSocket()
     this.serviceId = localStorage.getItem('serviceId')
     let that = this
     // 监听读取标签返回事件
     that.$socket.on('read-tags-back', (data) => {
-      console.log("读取标签返回", data);
-      // that.form.tags = data.tags
+      const isEqual = this.arraysEqual(that.form.tags, data.tags)
+      that.codeNum = data.tags.length
+      if (!isEqual) {
+        that.isReading = true
+      } else {
+        that.isReading = false
+
+      }
+      that.form.tags = data.tags
+
     })
 
     // this.readTags()
   },
   mounted() {
     this.getCurrencyList()
+    console.log(getCurrentFormattedTime());
+    this.form.currentTime = getCurrentFormattedTime()
   }
 }
 </script>

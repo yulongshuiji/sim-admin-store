@@ -19,7 +19,7 @@ export function findMenuListById(list, id) {
   return result;
 }
 
-function getCurrentFormattedTime() {
+export function getCurrentFormattedTime() {
   const now = new Date();
 
   const year = now.getFullYear();

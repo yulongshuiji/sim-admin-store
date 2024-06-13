@@ -16,6 +16,11 @@ const getters = {
 	size: state => state.app.size,
   stackRoutes: state => state.permission.stackRoute,
   showService: state => state.settings.showBindeService,
-  serveiceList: state => state.settings.serviceList
+  serveiceList: state => state.settings.serviceList,
+  codeCurrencyList: state => state.code.currencyList,
+  counterList: state => state.code.counterList,
+  selectTime: state => state.code.selectTime,
+  codeNum: state => state.code.codeNum,
+  codeDes: state => state.code.codeDes
 }
 export default getters

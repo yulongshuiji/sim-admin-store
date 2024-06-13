@@ -31,51 +31,80 @@ export default {
       list: [
         {
           icon: one,
+          value: '0.5'
         },
         {
           icon: two,
+          value: '1'
+
         },
         {
           icon: three,
+          value: '5'
+
         },
         {
           icon: four,
+          value: '10'
+
         },
         {
           icon: five,
+          value: '20'
+
         },
         {
           icon: six,
+          value: '25'
+
         },
         {
           icon: seven,
+          value: '50'
+
         },
         {
           icon: eight,
+          value: '100'
+
         },
         {
           icon: nine,
+          value: '500'
+
         },
         {
           icon: ten,
+          value: '1000'
         },
         {
           icon: eleven,
+          value: '5000'
         },
         {
           icon: twelve,
+          value: '10000'
+
         },
         {
           icon: thirtheen,
+          value: '20000'
+
         },
         {
           icon: fourteen,
+          value: '50000'
+
         },
         {
           icon: fifteen,
+          value: '100000'
+
         },
         {
           icon: sixteen,
+          value: '200000'
+
         },
 
       ]
@@ -86,6 +115,8 @@ export default {
       for (let index = 0; index < this.list.length; index++) {
         this.$set(this.list[index], 'choose', index === i);
       }
+
+      this.$emit('numEvent', this.list[i].value)
 
     }
   }

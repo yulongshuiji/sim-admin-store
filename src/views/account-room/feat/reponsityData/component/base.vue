@@ -1,17 +1,17 @@
 <template>
   <div class="base-bg" v-loading="reading" element-loading-background="rgba(0, 0, 0, 0.7)"
     element-loading-spinner="el-icon-loading" element-loading-text="正在读取中">
-    <div class="code-num" v-if="reading">
-      当前筹码数量：200
+    <div class="code-num" v-if="codeNum > 0">
+      当前筹码数量：{{codeNum}}
     </div>
-    <img class="code-img" v-if="reading" src="../../../../../assets/acount-room/responsity/code-bg.svg" alt="">
-    <div class="code-num2" v-if="!reading">
-      请将筹码放入感应版
+    <img class="code-img" v-if="codeNum > 0" src="../../../../../assets/acount-room/responsity/code-bg.svg" alt="">
+    <div class="code-num2" v-if="codeNum == 0">
+      请将筹码放入感应版{{codeNum}}
     </div>
 
-    <img class="code-img2" v-if="!reading" src="../../../../../assets/acount-room/responsity/base-bg2.svg" alt="">
+    <img class="code-img2" v-if="codeNum == 0" src="../../../../../assets/acount-room/responsity/base-bg2.svg" alt="">
     <div>
-      <el-button type="primary" plain class="btn" v-if="!reading" style="width:fit-content" @click="pre">上一步</el-button>
+      <el-button type="primary" plain class="btn" v-if="codeNum == 0" style="width:fit-content" @click="pre">上一步</el-button>
       <el-button type="primary" class="btn" style="width:fit-content" @click="next">下一步</el-button>
     </div>
 
@@ -20,9 +20,18 @@
 
 <script>
 export default {
+  props: {
+    reading: {
+      type: Boolean,
+      default: false
+    },
+    codeNum: {
+      type: Number,
+      default: 0
+    }
+  },
   data() {
     return {
-      reading: false
     }
   },
   methods: {
