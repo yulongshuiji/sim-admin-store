@@ -127,6 +127,9 @@ export default {
     readTags() {
       this.$socket.emit("read-tags-start", { service_id: this.serviceId, action: "tagAdd" });
     },
+    closeTags() {
+      this.$socket.emit("read-tags-stop", { service_id: this.serviceId });
+    },
     back() {
       this.$router.back()
     },
@@ -153,6 +156,10 @@ export default {
       this.step += 1
       if (this.step == 3) {
         this.show = true
+      }
+
+      if(this.step !== 1) {
+        this.closeTags()
       }
     },
     radioChange(e) {
@@ -275,7 +282,11 @@ export default {
     this.getCurrencyList()
     console.log(getCurrentFormattedTime());
     this.form.currentTime = getCurrentFormattedTime()
+  },
+  destroyed() {
+    this.closeTags()
   }
+
 }
 </script>
 
