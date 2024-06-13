@@ -16,6 +16,7 @@
                 {{ item.currency_name }}
               </el-radio>
             </el-radio-group>
+
           </el-form-item>
           <el-form-item required label="筹码类型" class="radio">
             <el-radio-group v-model="radio">
