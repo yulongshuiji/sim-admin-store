@@ -11,7 +11,7 @@
             </el-input>
           </el-form-item>
           <el-form-item required label="币种" class="radio">
-            <el-radio-group v-model="form.currency_id">
+            <el-radio-group v-model="form.currency_id" @change="radioChange">
               <el-radio v-for="item in currencyList" :key="item.currency_id" :label="item.currency_id">
                 {{ item.currency_name }}
               </el-radio>
@@ -19,8 +19,9 @@
           </el-form-item>
           <el-form-item required label="筹码类型" class="radio">
             <el-radio-group v-model="radio">
-              <el-radio :label="3">现金码</el-radio>
-              <el-radio :label="6">签单码</el-radio>
+              <el-radio v-for="item in counterList" :key="item.counter_id" :label="item.counter_id">
+                {{ item.counter_name }}
+              </el-radio>
             </el-radio-group>
           </el-form-item>
           <el-form-item required label="面额选择">
@@ -47,6 +48,8 @@ import recognition from './component/recognition.vue';
 import cusTip from './component/modal.vue'
 import ErrorTip from '@/components/error/index.vue'
 import { currencyList } from '@/api/currency'
+import { counterList, counterDetail } from '@/api/counter'
+
 
 export default {
   components: {
@@ -115,28 +118,37 @@ export default {
         this.back()
       }
     },
-      // 获取币种列表
-      getCurrencyList() {
+    // 获取币种列表
+    getCurrencyList() {
       currencyList().then(res => {
         this.currencyList = res.data
+        this.form = {
+          ...this.form,
+          currency_id: this.currencyList[0].currency_id
+        }
+        this.getCounterList(this.form.currency_id)
+
       })
     },
     // 获取游戏列表
     getCounterList(value) {
+      console.log("请求");
       this.form.counter_id = undefined
-      counterList({currency_id: value}).then(res => {
+      counterList({ currency_id: value }).then(res => {
         this.counterList = res.data
       })
     },
     // 获取码种详情
     getCounterDetail(value) {
       this.form.denomination = undefined
-      counterDetail({counter_id: value}).then(res => {
+      counterDetail({ counter_id: value }).then(res => {
         this.counterChipList = res.data.counter_chip
       })
     },
   },
   created() {
+    // this.getCurrencyList()
+
     this.serviceId = localStorage.getItem('serviceId')
     let that = this
     // 监听读取标签返回事件
@@ -144,9 +156,11 @@ export default {
       console.log("读取标签返回", data);
       // that.form.tags = data.tags
     })
-    this.getCurrencyList()
 
     // this.readTags()
+  },
+  mounted() {
+    this.getCurrencyList()
   }
 }
 </script>
