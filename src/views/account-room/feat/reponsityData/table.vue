@@ -1,7 +1,8 @@
 <template>
   <div>
-    <el-table :data="tableData" row-key="menu_id" :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
-      max-height="650" border>
+    <el-table v-loading="tableParams.loading" element-loading-background="rgba(0, 0, 0, 0.7)" element-loading-spinner="el-icon-loading"
+      element-loading-text="加载中" :data="tableData" row-key="menu_id"
+      :tree-props="{ children: 'children', hasChildren: 'hasChildren' }" max-height="650" border>
 
       <el-table-column v-for="column in columns" :key="column.key" :prop="column.key" :label="column.name">
         <template v-slot="scope">
@@ -22,39 +23,22 @@
       </el-table-column>
       <el-table-column label="操作" v-if="operateObj.length > 0">
         <template slot-scope="scope">
-          <el-button size="mini" style="margin-right: 20px" type="text" v-for="(item,index) in operateObj" :key="index" @click="handleUpdate(scope.row)">{{
-            item.label }}</el-button>
+          <el-button size="mini" style="margin-right: 20px" type="text" v-for="(item, index) in operateObj" :key="index"
+            @click="item.method(scope.row)">{{
+              item.label }}</el-button>
         </template>
       </el-table-column>
-
-      <!-- <el-table-column prop="t1" label="清单编号" :show-overflow-tooltip="true" width="300" />
-
-      <el-table-column prop="t2" label="入库时间" align="center" />
-      <el-table-column prop="t3" label="币种" align="center" :show-overflow-tooltip="true" width="200" />
-      <el-table-column prop="t4" label="筹码类型" align="center" :show-overflow-tooltip="true" width="250" />
-      <el-table-column prop="t5" label="筹码面额" align="center" :show-overflow-tooltip="true" width="200" />
-      <el-table-column prop="t6" label="筹码数量" align="center" :show-overflow-tooltip="true" width="200" />
-      <el-table-column prop="t7" label="操作人" align="center" :show-overflow-tooltip="true" width="200" />
-      <el-table-column label="状态" align="center">
-        <template slot-scope="scope">
-          <div class="staus-box" v-if="scope.row.t8 == 0">
-            <span class="suc-cir"></span>
-            <span>提交成功</span>
-          </div>
-          <div class="staus-box" v-else>
-            <span class="fail-cir"></span>
-            <span>提交失败</span>
-          </div>
-        </template>
-      </el-table-column> -->
     </el-table>
-    <pagination v-show="total > 0" :total="total" :page.sync="queryParams.page_size" :limit.sync="queryParams.page_num"
+    <pagination v-show="tableParams.total > 0" :total="tableParams.total" :page.sync="tableParams.page_size" :limit.sync="tableParams.page_num"
       @pagination="getList" />
   </div>
 
 </template>
 
 <script>
+import { codeInResposityList } from '@/api/code'
+import { counterList } from '@/api/counter'
+import { currencyList } from '@/api/currency'
 export default {
   props: {
     columns: {
@@ -67,22 +51,31 @@ export default {
     },
     operateObj: {
       type: Array,
+    },
+    tableParams: {
+      type: Object
     }
   },
   data() {
     return {
-      total: 100,
-      queryParams: {
-        page_size: 10,
-        page_num: 1
-      },
+
+      codeList: [], // 码种
+      currencyList: [] // 币种
 
     }
   },
   methods: {
     getList() {
 
+    },
+    async initData() {
+      const res = await counterList()
+      this.codeList = res.data
+      const res2 = await currencyList()
+      this.currencyList = res2.data
     }
+  },
+  mounted() {
   }
 
 }

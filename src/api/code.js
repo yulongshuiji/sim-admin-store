@@ -9,3 +9,12 @@ export function codeInResposity(data) {
     data
   })
 }
+
+// 筹码出入库清单
+export function codeInResposityList(data) {
+  return request({
+    url: '/adminStore/tagRepositoryListPage',
+    method: 'post',
+    data
+  })
+}

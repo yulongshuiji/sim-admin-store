@@ -387,7 +387,7 @@ export default {
           ]
         },
         {
-          name: '财务入账',
+          name: '靴账目',
           key: 'three',
           columns: [
             {
@@ -449,10 +449,37 @@ export default {
           ]
         },
         {
-          name: '财务支出',
+          name: '露珠结果',
           key: 'four'
         },
-
+        {
+          name: '出码明细',
+          key: 'five'
+        },
+        {
+          name: '加彩明细',
+          key: 'six'
+        },
+        {
+          name: '收码明细',
+          key: 'seven'
+        },
+        {
+          name: '提彩明细',
+          key: 'eight'
+        },
+        {
+          name: '发行明细',
+          key: 'nine'
+        },
+        {
+          name: '入柜明细',
+          key: 'ten'
+        },
+        {
+          name: '小费兑换明细',
+          key: 'eleven'
+        },
       ],
       columns1: [
         {

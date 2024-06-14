@@ -13,15 +13,13 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item required label="筹码类型" class="radio">
-        <el-radio-group v-model="counterList[0].counter_id" >
-              <el-radio v-for="item in counterList" :key="item.counter_id" :label="item.counter_id">
-                {{ item.counter_name }}
-              </el-radio>
-            </el-radio-group>
+        <el-radio-group v-model="counterList[0].counter_id">
+          <el-radio v-for="item in counterList" :key="item.counter_id" :label="item.counter_id">
+            {{ item.counter_name }}
+          </el-radio>
+        </el-radio-group>
         <cashList2></cashList2>
-
       </el-form-item>
-
       <div class="btn-area">
         <el-button type="primary" @click="next">下一步</el-button>
       </div>
